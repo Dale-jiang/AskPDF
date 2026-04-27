@@ -6,5 +6,7 @@
     <color name="trans">#00000000</color>
     <color name="page_bg_color">#F9F9F9</color>
     <color name="text_color">#081C2C</color>
+    <color name="main_tab_active">#B00F1A</color>
+    <color name="main_tab_inactive">#C9C9C9</color>
 
 </resources>
