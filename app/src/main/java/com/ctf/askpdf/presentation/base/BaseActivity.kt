@@ -43,16 +43,18 @@ abstract class BaseActivity<VB : ViewBinding>(
 
     override fun onAttachedToWindow() = myEnableEdgeToEdge()
 
-    fun AppCompatActivity.myEnableEdgeToEdge(parentView: ViewGroup? = null, topPadding: Boolean = true, bottomPadding: Boolean = true) {
+    fun AppCompatActivity.myEnableEdgeToEdge(topView: ViewGroup? = null, bottomView: ViewGroup? = null,topPadding: Boolean = true, bottomPadding: Boolean = true) {
         try {
             enableEdgeToEdge()
             val listenerView = window.decorView
-            val paddingTarget = parentView ?: listenerView
+            val paddingTopTarget = topView ?: listenerView
+            val paddingBottomTarget = bottomView ?: listenerView
             ViewCompat.setOnApplyWindowInsetsListener(listenerView) { _, insets ->
                 val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
                 val topInset = if (topPadding) bars.top else 0
                 val bottomInset = if (bottomPadding) bars.bottom else 0
-                paddingTarget.setPadding(0, topInset, 0, bottomInset)
+                paddingTopTarget.setPadding(0, topInset, 0, 0)
+                paddingBottomTarget.setPadding(0, 0, 0, bottomInset)
                 insets
             }
         } catch (throwable: Throwable) {
