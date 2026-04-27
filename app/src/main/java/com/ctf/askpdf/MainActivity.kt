@@ -8,6 +8,9 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.ctf.askpdf.databinding.ActivityMainBinding
 import com.ctf.askpdf.presentation.base.BaseActivity
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
@@ -27,7 +30,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
      * 初始化首页基础 UI。
      */
     override fun initView(savedInstanceState: Bundle?) {
+        refreshHomeDate()
         initMainTabs()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refreshHomeDate()
+    }
+
+    /**
+     * 刷新首页日期文本，页面恢复时同步当天日期。
+     */
+    private fun refreshHomeDate() {
+        val dateFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.getDefault())
+        binding.tvDate.text = LocalDate.now().format(dateFormatter)
     }
 
     /**
