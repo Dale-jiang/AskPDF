@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="36dp"
+        android:drawableTop="@drawable/no_permission_image"
+        android:drawablePadding="15dp"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="@string/allow_file_permissions_to_manage_documents"
+        android:textColor="#666666"
+        android:textSize="16sp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_allow"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_permission_button"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="@string/allow"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+</androidx.appcompat.widget.LinearLayoutCompat>
