@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "821196624341",
+    "project_id": "a247-9055b",
+    "storage_bucket": "a247-9055b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:821196624341:android:519297c27502c8a0692d5c",
+        "android_client_info": {
+          "package_name": "com.show.cat.caar.best.newbest.fastvpn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAseAuZWF9C88DSMfiXlDKPiCHBwmXJL-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

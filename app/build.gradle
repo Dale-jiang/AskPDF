@@ -1,0 +1,122 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'stringfog'
+
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+}
+
+import com.github.megatronking.stringfog.plugin.StringFogMode
+import com.github.megatronking.stringfog.plugin.kg.RandomKeyGenerator
+
+stringfog {
+    implementation 'com.github.megatronking.stringfog.xor.StringFogImpl'
+    enable true
+    fogPackages = ['com.ctf.askpdf']
+    kg new RandomKeyGenerator()
+    mode StringFogMode.bytes
+}
+
+android {
+    namespace 'com.ctf.askpdf'
+    compileSdk {
+        //noinspection GradleDependency
+        version = release(36) {
+            minorApiLevel = 1
+        }
+    }
+
+    defaultConfig {
+//        applicationId "com.ctf.askpdf"
+        applicationId "com.show.cat.caar.best.newbest.fastvpn"
+        minSdk 26
+        //noinspection OldTargetApi
+        targetSdk 36
+        versionCode 100
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+
+        debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+
+        release {
+
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
+    }
+    buildFeatures {
+        buildConfig = true
+        viewBinding = true
+    }
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.18.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.10.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.3.0'
+
+    implementation("androidx.appcompat:appcompat:1.7.1")
+    implementation("com.google.android.material:material:1.13.0")
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
+    implementation 'androidx.fragment:fragment-ktx:1.8.9'
+
+    // Lifecycle & ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.10.0")
+
+    implementation 'com.github.seapeak233:AndroidDocViewer:0.0.3'
+
+    implementation 'com.github.marain87:AndroidPdfViewer:3.2.8'
+
+    //mlkt
+    implementation 'com.google.android.gms:play-services-mlkit-document-scanner:16.0.0'
+
+    //stringfog
+    implementation 'com.github.megatronking.stringfog:xor:5.0.0'
+
+    // facebook
+    implementation 'com.facebook.android:facebook-android-sdk:18.2.3'
+
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:34.12.0"))
+    implementation "com.google.firebase:firebase-analytics"
+    implementation "com.google.firebase:firebase-config"
+    implementation "com.google.firebase:firebase-messaging"
+    implementation "com.google.firebase:firebase-crashlytics"
+
+    def room_version = "2.8.4"
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation("androidx.room:room-ktx:$room_version")
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:5.0.7'
+    //Gson
+    implementation 'com.google.code.gson:gson:2.13.2'
+
+}
