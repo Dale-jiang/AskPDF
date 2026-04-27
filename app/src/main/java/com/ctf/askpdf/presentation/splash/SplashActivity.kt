@@ -1,5 +1,6 @@
 package com.ctf.askpdf.presentation.splash
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.addCallback
@@ -12,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate) {
 
     private var loadingStartTime = 0L
@@ -22,7 +24,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
             totalTimeMillis = MAX_LOADING_TIME_MILLIS,
             intervalMillis = TICK_INTERVAL_MILLIS,
             onTick = {
-                if (true){
+                if (true) {
                     scheduleLaunchAction { openMainPage() }
                 }
             },
