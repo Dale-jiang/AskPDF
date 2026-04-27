@@ -52,7 +52,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
     }
 
-    override fun onAttachedToWindow() = myEnableEdgeToEdge(binding.container, binding.bottomTabs)
+    override fun onAttachedToWindow() = myEnableEdgeToEdge(binding.container)
 
     /**
      * 初始化首页基础 UI、顶层 tab 和文件权限状态。
