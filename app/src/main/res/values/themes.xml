@@ -3,7 +3,7 @@
 
     <style name="Theme.AskPDF" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
-        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowBackground">@color/page_bg_color</item>
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
