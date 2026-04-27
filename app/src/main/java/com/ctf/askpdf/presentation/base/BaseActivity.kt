@@ -2,7 +2,11 @@ package com.ctf.askpdf.presentation.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseActivity<VB : ViewBinding>(
@@ -16,6 +20,7 @@ abstract class BaseActivity<VB : ViewBinding>(
         super.onCreate(savedInstanceState)
         binding = inflateBinding(layoutInflater)
         setContentView(binding.root)
+        setDensity()
         initView(savedInstanceState)
         initData()
         observeData()
@@ -35,4 +40,32 @@ abstract class BaseActivity<VB : ViewBinding>(
      * 注册 LiveData、Flow 或其它状态监听。
      */
     protected open fun observeData() = Unit
+
+    override fun onAttachedToWindow() = myEnableEdgeToEdge()
+
+    fun AppCompatActivity.myEnableEdgeToEdge(parentView: ViewGroup? = null, topPadding: Boolean = true, bottomPadding: Boolean = true) {
+        try {
+            enableEdgeToEdge()
+            val listenerView = window.decorView
+            val paddingTarget = parentView ?: listenerView
+            ViewCompat.setOnApplyWindowInsetsListener(listenerView) { _, insets ->
+                val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                val topInset = if (topPadding) bars.top else 0
+                val bottomInset = if (bottomPadding) bars.bottom else 0
+                paddingTarget.setPadding(0, topInset, 0, bottomInset)
+                insets
+            }
+        } catch (throwable: Throwable) {
+            throwable.printStackTrace()
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    private fun AppCompatActivity.setDensity() {
+        resources.displayMetrics.apply {
+            density = heightPixels / 765f
+            densityDpi = (density * 160).toInt()
+            scaledDensity = density
+        }
+    }
 }
