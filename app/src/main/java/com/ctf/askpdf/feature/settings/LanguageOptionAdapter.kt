@@ -7,8 +7,7 @@ import com.ctf.askpdf.R
 import com.ctf.askpdf.databinding.ItemLanguageOptionBinding
 
 class LanguageOptionAdapter(
-    private val items: List<LanguageOption>,
-    private val onSelected: (Int) -> Unit
+    private val items: List<LanguageOption>
 ) : RecyclerView.Adapter<LanguageOptionAdapter.LanguageViewHolder>() {
 
     var selectedIndex: Int = 0
@@ -50,6 +49,5 @@ class LanguageOptionAdapter(
         selectedIndex = position
         notifyItemChanged(oldIndex)
         notifyItemChanged(selectedIndex)
-        onSelected(selectedIndex)
     }
 }

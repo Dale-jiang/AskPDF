@@ -25,7 +25,7 @@ class LanguageSettingsActivity : BaseActivity<ActivityLanguageSettingsBinding>(A
         onBackPressedDispatcher.addCallback(this) { finish() }
         binding.btnBack.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         visibleLanguageOptions = buildVisibleLanguageOptions()
-        languageAdapter = LanguageOptionAdapter(visibleLanguageOptions) {}
+        languageAdapter = LanguageOptionAdapter(visibleLanguageOptions)
         languageAdapter.setInitialSelection(0)
         binding.recyclerView.itemAnimator = null
         binding.recyclerView.adapter = languageAdapter

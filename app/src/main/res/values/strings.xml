@@ -5,10 +5,10 @@
     <string name="tab_collection">Collection</string>
     <string name="tab_settings">Settings</string>
     <string name="all">All</string>
-    <string name="pdf">PDF</string>
-    <string name="word">Word</string>
-    <string name="excel">Excel</string>
-    <string name="ppt">PPT</string>
+    <string name="pdf" translatable="false">PDF</string>
+    <string name="word" translatable="false">Word</string>
+    <string name="excel" translatable="false">Excel</string>
+    <string name="ppt" translatable="false">PPT</string>
     <string name="allow">Allow</string>
     <string name="allow_file_permissions_to_manage_documents">Allow file permissions to manage documents</string>
     <string name="no_files_tips">No supported documents found</string>
