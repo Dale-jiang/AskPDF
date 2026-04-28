@@ -14,6 +14,7 @@ import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import com.ctf.askpdf.R
+import com.ctf.askpdf.app.AppLifecycleUtils
 import com.ctf.askpdf.databinding.DialogDocumentFileActionsBinding
 import com.ctf.askpdf.databinding.FragmentDocumentListBinding
 import com.ctf.askpdf.document.model.DocumentFile
@@ -21,6 +22,7 @@ import com.ctf.askpdf.document.model.DocumentKind
 import com.ctf.askpdf.document.model.DocumentTab
 import com.ctf.askpdf.document.print.DocumentPrintAdapter
 import com.ctf.askpdf.presentation.adapter.DocumentFileAdapter
+import com.ctf.askpdf.presentation.base.BaseActivity
 import com.ctf.askpdf.presentation.base.BaseFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -77,6 +79,11 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
             DocumentTab.RECENT -> viewModel.recentFilesLiveData.observe(viewLifecycleOwner) { submitFiles(it) }
             DocumentTab.COLLECTION -> viewModel.collectionFilesLiveData.observe(viewLifecycleOwner) { submitFiles(it) }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        AppLifecycleUtils.markNavigatingToSetting(false)
     }
 
     /**
@@ -219,9 +226,18 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
      */
     private fun printDocument(file: DocumentFile) {
         runCatching {
-            val printManager = requireContext().getSystemService(Context.PRINT_SERVICE) as PrintManager
-            printManager.print(file.displayName, DocumentPrintAdapter(File(file.path), file.displayName), null)
+            AppLifecycleUtils.markNavigatingToSetting(true)
+            val printContext = (requireActivity() as? BaseActivity<*>)?.printContext ?: requireActivity()
+            val printManager = printContext.getSystemService(Context.PRINT_SERVICE) as PrintManager
+            printManager.print(
+                file.displayName,
+                DocumentPrintAdapter(File(file.path), file.displayName) {
+                    AppLifecycleUtils.markNavigatingToSetting(false)
+                },
+                null
+            )
         }.onFailure {
+            AppLifecycleUtils.markNavigatingToSetting(false)
             Toast.makeText(requireContext(), R.string.print_file_failed, Toast.LENGTH_SHORT).show()
         }
     }

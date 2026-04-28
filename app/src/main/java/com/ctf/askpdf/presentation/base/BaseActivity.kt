@@ -12,14 +12,15 @@ import androidx.viewbinding.ViewBinding
 import com.ctf.askpdf.core.locale.AppLanguageConfig
 import com.ctf.askpdf.data.local.selectedLanguageTag
 
-abstract class BaseActivity<VB : ViewBinding>(
-    private val inflateBinding: (LayoutInflater) -> VB
-) : AppCompatActivity() {
+abstract class BaseActivity<VB : ViewBinding>(private val inflateBinding: (LayoutInflater) -> VB) : AppCompatActivity() {
+
+    var printContext: Context? = null
 
     protected lateinit var binding: VB
         private set
 
     override fun attachBaseContext(newBase: Context) {
+        printContext = newBase
         val languageTag = AppLanguageConfig.resolveLanguageTag(selectedLanguageTag)
         super.attachBaseContext(AppLanguageConfig.wrapContext(newBase, languageTag))
     }

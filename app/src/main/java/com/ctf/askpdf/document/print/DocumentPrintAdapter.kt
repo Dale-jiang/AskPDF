@@ -12,7 +12,8 @@ import java.io.FileOutputStream
 
 class DocumentPrintAdapter(
     private val file: File,
-    private val jobName: String
+    private val jobName: String,
+    private val onFinished: () -> Unit = {}
 ) : PrintDocumentAdapter() {
 
     /**
@@ -63,5 +64,12 @@ class DocumentPrintAdapter(
                 callback?.onWriteFailed(it.localizedMessage)
             }
         }.start()
+    }
+
+    /**
+     * 打印流程结束时通知调用方恢复生命周期标记。
+     */
+    override fun onFinish() {
+        onFinished()
     }
 }
