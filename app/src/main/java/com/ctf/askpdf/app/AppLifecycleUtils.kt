@@ -6,7 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.PowerManager
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import com.ctf.askpdf.MainActivity
+import com.ctf.askpdf.core.locale.AppLanguageConfig
+import com.ctf.askpdf.data.local.selectedLanguageTag
 import com.ctf.askpdf.presentation.splash.SplashActivity
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
@@ -114,7 +118,9 @@ object AppLifecycleUtils {
             }
         }
 
-        override fun onActivityResumed(activity: Activity) = Unit
+        override fun onActivityResumed(activity: Activity) {
+            refreshActivityLanguage(activity)
+        }
 
         override fun onActivityPaused(activity: Activity) = Unit
 
@@ -134,6 +140,16 @@ object AppLifecycleUtils {
         private fun isDeviceInteractive(activity: Activity): Boolean {
             val pm = activity.getSystemService(Context.POWER_SERVICE) as PowerManager
             return pm.isInteractive
+        }
+
+        /**
+         * Activity 回到前台时刷新应用和当前页面语言资源。
+         */
+        private fun refreshActivityLanguage(activity: Activity) {
+            val languageTag = AppLanguageConfig.resolveLanguageTag(selectedLanguageTag)
+            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(languageTag))
+            AppLanguageConfig.refreshResources(activity.applicationContext, languageTag)
+            AppLanguageConfig.refreshResources(activity, languageTag)
         }
     }
 }

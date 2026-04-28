@@ -60,6 +60,20 @@ object AppLanguageConfig {
     }
 
     /**
+     * 刷新已有 Context 的 Resources 语言配置。
+     */
+    @Suppress("DEPRECATION")
+    fun refreshResources(context: Context, languageTag: String) {
+        val locale = Locale.forLanguageTag(languageTag)
+        Locale.setDefault(locale)
+        val resources = context.resources
+        val configuration = Configuration(resources.configuration)
+        configuration.setLocale(locale)
+        configuration.setLayoutDirection(locale)
+        resources.updateConfiguration(configuration, resources.displayMetrics)
+    }
+
+    /**
      * 按完整 tag 或语言码匹配支持的语言。
      */
     private fun findLanguageByTag(languageTag: String): AppLanguage? {
