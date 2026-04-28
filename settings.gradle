@@ -9,6 +9,7 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        maven { url 'https://jitpack.io' }
     }
 }
 dependencyResolutionManagement {
@@ -17,6 +18,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+        maven { url = uri("https://maven.ghostscript.com/") }
         maven { url = uri("https://android-sdk.is.com/") }
         maven { url "https://repository.liferay.com/nexus/content/repositories/public/" }
         maven {url = uri("https://artifact.bytedance.com/repository/pangle/")}

@@ -8,6 +8,8 @@ buildscript {
         mavenCentral()
         gradlePluginPortal()
         maven { url "https://jitpack.io" }
+        maven { url = uri("https://maven.ghostscript.com/") }
+        maven { url "https://repository.liferay.com/nexus/content/repositories/public/" }
     }
     dependencies {
         classpath 'com.github.megatronking.stringfog:gradle-plugin:5.2.0'
