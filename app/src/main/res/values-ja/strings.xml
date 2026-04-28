@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">AskPDF</string>
+    <string name="tab_home">ホーム</string>
+    <string name="tab_recent_files">最近のファイル</string>
+    <string name="tab_collection">コレクション</string>
+    <string name="tab_settings">設定</string>
+    <string name="all">すべて</string>
+    <string name="allow">許可</string>
+    <string name="allow_file_permissions_to_manage_documents">文書を管理するためにファイル権限を許可してください</string>
+    <string name="no_files_tips">対応する文書が見つかりません</string>
+    <string name="no_history_yet">最近のファイルはありません</string>
+    <string name="no_bookmarks_yet">保存されたファイルはありません</string>
+    <string name="open_file_failed">このファイルを開けません</string>
+    <string name="rename">名前を変更</string>
+    <string name="share">共有</string>
+    <string name="print">印刷</string>
+    <string name="delete">削除</string>
+    <string name="rename_file">ファイル名を変更</string>
+    <string name="file_name">ファイル名</string>
+    <string name="cancel">キャンセル</string>
+    <string name="confirm">確認</string>
+    <string name="file_name_empty">ファイル名を入力してください</string>
+    <string name="file_name_exists">同じ名前のファイルが既に存在します</string>
+    <string name="rename_file_failed">このファイルの名前を変更できません</string>
+    <string name="delete_file_failed">このファイルを削除できません</string>
+    <string name="share_file_failed">このファイルを共有できません</string>
+    <string name="print_file_failed">このファイルを印刷できません</string>
+    <string name="share_app">アプリを共有</string>
+    <string name="language">言語</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="check_out_this_app">このアプリをチェック</string>
+    <string name="share_app_text">便利なアプリを見つけました: %1$s</string>
+    <string name="share_app_failed">このアプリを共有できません</string>
+</resources>

@@ -8,5 +8,6 @@
     <color name="text_color">#081C2C</color>
     <color name="main_tab_active">#B00F1A</color>
     <color name="main_tab_inactive">#C9C9C9</color>
+    <color name="settings_language_inactive">#9B9B9B</color>
 
 </resources>

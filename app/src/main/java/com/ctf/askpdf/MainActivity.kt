@@ -81,10 +81,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
      * 刷新首页日期文本，页面恢复时同步当天日期。
      */
     private fun refreshHomeDate() {
-        val dateFormatter = DateTimeFormatter.ofPattern(
-            getString(R.string.home_date_pattern),
-            Locale.getDefault()
-        )
+        val dateFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.getDefault())
         binding.tvDate.text = LocalDate.now().format(dateFormatter)
     }
 

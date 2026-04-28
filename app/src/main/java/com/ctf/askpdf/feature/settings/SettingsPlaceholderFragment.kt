@@ -14,7 +14,7 @@ class SettingsPlaceholderFragment : BaseFragment<FragmentSettingsStubBinding>(Fr
      */
     override fun initView(savedInstanceState: Bundle?) {
         binding.itemShareApp.setOnClickListener { shareAppLink() }
-        binding.itemLanguage.setOnClickListener { }
+        binding.itemLanguage.setOnClickListener { openLanguageSettings() }
         binding.itemPrivacy.setOnClickListener { openPrivacyPolicy() }
     }
 
@@ -42,5 +42,12 @@ class SettingsPlaceholderFragment : BaseFragment<FragmentSettingsStubBinding>(Fr
         startActivity(Intent(requireContext(), PolicyViewerActivity::class.java).apply {
             putExtra(PolicyViewerActivity.EXTRA_PAGE_URL, PolicyViewerActivity.DEFAULT_PRIVACY_URL)
         })
+    }
+
+    /**
+     * 打开多语言设置页面。
+     */
+    private fun openLanguageSettings() {
+        startActivity(Intent(requireContext(), LanguageSettingsActivity::class.java))
     }
 }

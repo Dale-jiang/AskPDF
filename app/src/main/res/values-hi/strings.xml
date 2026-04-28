@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">AskPDF</string>
+    <string name="tab_home">होम</string>
+    <string name="tab_recent_files">हाल की फाइलें</string>
+    <string name="tab_collection">संग्रह</string>
+    <string name="tab_settings">सेटिंग्स</string>
+    <string name="all">सभी</string>
+    <string name="allow">अनुमति दें</string>
+    <string name="allow_file_permissions_to_manage_documents">दस्तावेज़ प्रबंधित करने के लिए फ़ाइल अनुमति दें</string>
+    <string name="no_files_tips">कोई समर्थित दस्तावेज़ नहीं मिला</string>
+    <string name="no_history_yet">अभी कोई हाल की फाइल नहीं</string>
+    <string name="no_bookmarks_yet">अभी कोई सहेजी गई फाइल नहीं</string>
+    <string name="open_file_failed">यह फाइल नहीं खुल सकी</string>
+    <string name="rename">नाम बदलें</string>
+    <string name="share">शेयर करें</string>
+    <string name="print">प्रिंट</string>
+    <string name="delete">हटाएं</string>
+    <string name="rename_file">फाइल का नाम बदलें</string>
+    <string name="file_name">फाइल नाम</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="confirm">पुष्टि करें</string>
+    <string name="file_name_empty">फाइल नाम खाली नहीं हो सकता</string>
+    <string name="file_name_exists">इस नाम की फाइल पहले से मौजूद है</string>
+    <string name="rename_file_failed">इस फाइल का नाम नहीं बदला जा सका</string>
+    <string name="delete_file_failed">इस फाइल को हटाया नहीं जा सका</string>
+    <string name="share_file_failed">इस फाइल को शेयर नहीं किया जा सका</string>
+    <string name="print_file_failed">इस फाइल को प्रिंट नहीं किया जा सका</string>
+    <string name="share_app">ऐप शेयर करें</string>
+    <string name="language">भाषा</string>
+    <string name="privacy_policy">गोपनीयता नीति</string>
+    <string name="check_out_this_app">इस ऐप को देखें</string>
+    <string name="share_app_text">मुझे यह उपयोगी ऐप मिला: %1$s</string>
+    <string name="share_app_failed">यह ऐप शेयर नहीं किया जा सका</string>
+</resources>

@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">AskPDF</string>
+    <string name="tab_home">الرئيسية</string>
+    <string name="tab_recent_files">الأخيرة</string>
+    <string name="tab_collection">المجموعة</string>
+    <string name="tab_settings">الإعدادات</string>
+    <string name="all">الكل</string>
+    <string name="allow">سماح</string>
+    <string name="allow_file_permissions_to_manage_documents">اسمح بإذن الملفات لإدارة المستندات</string>
+    <string name="no_files_tips">لم يتم العثور على مستندات مدعومة</string>
+    <string name="no_history_yet">لا توجد ملفات حديثة</string>
+    <string name="no_bookmarks_yet">لا توجد ملفات محفوظة</string>
+    <string name="open_file_failed">تعذر فتح هذا الملف</string>
+    <string name="rename">إعادة تسمية</string>
+    <string name="share">مشاركة</string>
+    <string name="print">طباعة</string>
+    <string name="delete">حذف</string>
+    <string name="rename_file">إعادة تسمية الملف</string>
+    <string name="file_name">اسم الملف</string>
+    <string name="cancel">إلغاء</string>
+    <string name="confirm">تأكيد</string>
+    <string name="file_name_empty">لا يمكن أن يكون اسم الملف فارغًا</string>
+    <string name="file_name_exists">يوجد ملف بهذا الاسم بالفعل</string>
+    <string name="rename_file_failed">تعذرت إعادة تسمية هذا الملف</string>
+    <string name="delete_file_failed">تعذر حذف هذا الملف</string>
+    <string name="share_file_failed">تعذرت مشاركة هذا الملف</string>
+    <string name="print_file_failed">تعذرت طباعة هذا الملف</string>
+    <string name="share_app">مشاركة التطبيق</string>
+    <string name="language">اللغة</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="check_out_this_app">جرّب هذا التطبيق</string>
+    <string name="share_app_text">وجدت تطبيقًا مفيدًا: %1$s</string>
+    <string name="share_app_failed">تعذرت مشاركة هذا التطبيق</string>
+</resources>

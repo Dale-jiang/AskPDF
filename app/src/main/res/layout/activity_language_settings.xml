@@ -37,32 +37,44 @@
             android:gravity="center"
             android:includeFontPadding="false"
             android:maxLines="1"
-            android:text="@string/privacy_policy"
+            android:text="@string/language"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Privacy Policy" />
+            tools:text="Language" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/load_progress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="false"
-        android:max="100"
-        android:progress="0"
-        app:indicatorColor="@color/primary"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar"
-        app:trackColor="@color/trans"
-        app:trackThickness="2dp" />
-
-    <WebView
-        android:id="@+id/policy_web_view"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/btn_apply"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar"
+        tools:itemCount="8"
+        tools:listitem="@layout/item_language_option" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_apply"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_language_apply"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="@string/confirm"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/load_progress" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

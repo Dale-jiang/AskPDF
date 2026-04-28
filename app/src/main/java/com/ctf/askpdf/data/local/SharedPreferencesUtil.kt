@@ -120,3 +120,4 @@ object SharedPreferencesUtil {
 
 var isFirstLaunch by BooleanPreference(true)
 
+var selectedLanguageTag by StringPreference("")

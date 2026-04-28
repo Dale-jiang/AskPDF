@@ -1,11 +1,9 @@
 <resources>
     <string name="app_name">AskPDF</string>
-    <string name="splash_app_name">AnyPDF</string>
     <string name="tab_home">Home</string>
     <string name="tab_recent_files">Recent Files</string>
     <string name="tab_collection">Collection</string>
     <string name="tab_settings">Settings</string>
-    <string name="home_date_pattern">dd MMMM yyyy</string>
     <string name="all">All</string>
     <string name="pdf">PDF</string>
     <string name="word">Word</string>

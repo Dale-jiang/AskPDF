@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">AskPDF</string>
+    <string name="tab_home">Beranda</string>
+    <string name="tab_recent_files">Terbaru</string>
+    <string name="tab_collection">Koleksi</string>
+    <string name="tab_settings">Setelan</string>
+    <string name="all">Semua</string>
+    <string name="allow">Izinkan</string>
+    <string name="allow_file_permissions_to_manage_documents">Izinkan akses file untuk mengelola dokumen</string>
+    <string name="no_files_tips">Tidak ada dokumen yang didukung</string>
+    <string name="no_history_yet">Belum ada file terbaru</string>
+    <string name="no_bookmarks_yet">Belum ada file tersimpan</string>
+    <string name="open_file_failed">Tidak dapat membuka file ini</string>
+    <string name="rename">Ganti nama</string>
+    <string name="share">Bagikan</string>
+    <string name="print">Cetak</string>
+    <string name="delete">Hapus</string>
+    <string name="rename_file">Ganti nama file</string>
+    <string name="file_name">Nama file</string>
+    <string name="cancel">Batal</string>
+    <string name="confirm">Konfirmasi</string>
+    <string name="file_name_empty">Nama file tidak boleh kosong</string>
+    <string name="file_name_exists">File dengan nama ini sudah ada</string>
+    <string name="rename_file_failed">Tidak dapat mengganti nama file ini</string>
+    <string name="delete_file_failed">Tidak dapat menghapus file ini</string>
+    <string name="share_file_failed">Tidak dapat membagikan file ini</string>
+    <string name="print_file_failed">Tidak dapat mencetak file ini</string>
+    <string name="share_app">Bagikan aplikasi</string>
+    <string name="language">Bahasa</string>
+    <string name="privacy_policy">Kebijakan Privasi</string>
+    <string name="check_out_this_app">Lihat aplikasi ini</string>
+    <string name="share_app_text">Saya menemukan aplikasi berguna: %1$s</string>
+    <string name="share_app_failed">Tidak dapat membagikan aplikasi ini</string>
+</resources>

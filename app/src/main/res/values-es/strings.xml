@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">AskPDF</string>
+    <string name="tab_home">Inicio</string>
+    <string name="tab_recent_files">Recientes</string>
+    <string name="tab_collection">Colección</string>
+    <string name="tab_settings">Ajustes</string>
+    <string name="all">Todo</string>
+    <string name="allow">Permitir</string>
+    <string name="allow_file_permissions_to_manage_documents">Permite el acceso a archivos para gestionar documentos</string>
+    <string name="no_files_tips">No se encontraron documentos compatibles</string>
+    <string name="no_history_yet">No hay archivos recientes</string>
+    <string name="no_bookmarks_yet">No hay archivos guardados</string>
+    <string name="open_file_failed">No se puede abrir este archivo</string>
+    <string name="rename">Renombrar</string>
+    <string name="share">Compartir</string>
+    <string name="print">Imprimir</string>
+    <string name="delete">Eliminar</string>
+    <string name="rename_file">Renombrar archivo</string>
+    <string name="file_name">Nombre del archivo</string>
+    <string name="cancel">Cancelar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="file_name_empty">El nombre no puede estar vacío</string>
+    <string name="file_name_exists">Ya existe un archivo con este nombre</string>
+    <string name="rename_file_failed">No se puede renombrar este archivo</string>
+    <string name="delete_file_failed">No se puede eliminar este archivo</string>
+    <string name="share_file_failed">No se puede compartir este archivo</string>
+    <string name="print_file_failed">No se puede imprimir este archivo</string>
+    <string name="share_app">Compartir app</string>
+    <string name="language">Idioma</string>
+    <string name="privacy_policy">Política de privacidad</string>
+    <string name="check_out_this_app">Mira esta app</string>
+    <string name="share_app_text">Encontré una app útil: %1$s</string>
+    <string name="share_app_failed">No se puede compartir esta app</string>
+</resources>

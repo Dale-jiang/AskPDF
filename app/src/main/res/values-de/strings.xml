@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">AskPDF</string>
+    <string name="tab_home">Start</string>
+    <string name="tab_recent_files">Zuletzt</string>
+    <string name="tab_collection">Sammlung</string>
+    <string name="tab_settings">Einstellungen</string>
+    <string name="all">Alle</string>
+    <string name="allow">Erlauben</string>
+    <string name="allow_file_permissions_to_manage_documents">Dateiberechtigung zum Verwalten von Dokumenten erlauben</string>
+    <string name="no_files_tips">Keine unterstützten Dokumente gefunden</string>
+    <string name="no_history_yet">Keine zuletzt verwendeten Dateien</string>
+    <string name="no_bookmarks_yet">Keine gespeicherten Dateien</string>
+    <string name="open_file_failed">Diese Datei kann nicht geöffnet werden</string>
+    <string name="rename">Umbenennen</string>
+    <string name="share">Teilen</string>
+    <string name="print">Drucken</string>
+    <string name="delete">Löschen</string>
+    <string name="rename_file">Datei umbenennen</string>
+    <string name="file_name">Dateiname</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="confirm">Bestätigen</string>
+    <string name="file_name_empty">Der Dateiname darf nicht leer sein</string>
+    <string name="file_name_exists">Eine Datei mit diesem Namen existiert bereits</string>
+    <string name="rename_file_failed">Diese Datei kann nicht umbenannt werden</string>
+    <string name="delete_file_failed">Diese Datei kann nicht gelöscht werden</string>
+    <string name="share_file_failed">Diese Datei kann nicht geteilt werden</string>
+    <string name="print_file_failed">Diese Datei kann nicht gedruckt werden</string>
+    <string name="share_app">App teilen</string>
+    <string name="language">Sprache</string>
+    <string name="privacy_policy">Datenschutzrichtlinie</string>
+    <string name="check_out_this_app">Sieh dir diese App an</string>
+    <string name="share_app_text">Ich habe eine nützliche App gefunden: %1$s</string>
+    <string name="share_app_failed">Diese App kann nicht geteilt werden</string>
+</resources>
