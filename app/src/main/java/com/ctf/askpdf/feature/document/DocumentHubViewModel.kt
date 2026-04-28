@@ -158,6 +158,24 @@ class DocumentHubViewModel : ViewModel() {
     }
 
     /**
+     * 将新创建的 PDF 加入首页列表，并通知系统媒体库刷新。
+     */
+    fun addCreatedPdf(context: Context, pdfFile: File) {
+        viewModelScope.launch(Dispatchers.IO + SupervisorJob()) {
+            val documentFile = DocumentFile(
+                displayName = pdfFile.name,
+                path = pdfFile.absolutePath,
+                mimeType = "application/pdf",
+                size = pdfFile.length(),
+                dateAdded = pdfFile.lastModified()
+            )
+            val currentFiles = scannedFilesLiveData.value.orEmpty()
+            scannedFilesLiveData.postValue(listOf(documentFile) + currentFiles.filterNot { it.path == documentFile.path })
+            scanChangedFiles(context, pdfFile.absolutePath)
+        }
+    }
+
+    /**
      * 从 MediaStore 查询支持的文档类型。
      */
     private fun queryDocuments(resolver: ContentResolver): List<DocumentFile> {

@@ -33,6 +33,15 @@
     <string name="enter_password_to_view_pdf">Enter password to view PDF</string>
     <string name="please_enter_password">Please enter password</string>
     <string name="incorrect_password">Incorrect password</string>
+    <string name="create_pdf">Create PDF</string>
+    <string name="creating_pdf">Creating PDF...</string>
+    <string name="create_cancelled">Create cancelled</string>
+    <string name="create_failed">Unable to create PDF</string>
+    <string name="create_success">PDF created successfully</string>
+    <string name="result">Result</string>
+    <string name="create_success_title">PDF Created</string>
+    <string name="create_success_message">Your scanned document is ready.</string>
+    <string name="open_pdf">Open PDF</string>
     <string name="share_app">Share App</string>
     <string name="language">Language</string>
     <string name="privacy_policy">Privacy Policy</string>

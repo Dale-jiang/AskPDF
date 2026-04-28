@@ -8,24 +8,37 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.DialogFragment
+import com.ctf.askpdf.R
 import com.ctf.askpdf.databinding.DialogRenameFileBinding
 
 class RenameFileDialog : DialogFragment() {
 
     companion object {
         private const val ARG_INITIAL_NAME = "arg_initial_name"
+        private const val ARG_TITLE_RES = "arg_title_res"
 
-        fun newInstance(initialName: String, onConfirm: (String, (Boolean) -> Unit) -> Unit): RenameFileDialog {
+        fun newInstance(
+            initialName: String,
+            titleRes: Int = R.string.rename_file,
+            onCancel: () -> Unit = {},
+            onConfirm: (String, (Boolean) -> Unit) -> Unit
+        ): RenameFileDialog {
             return RenameFileDialog().apply {
-                arguments = Bundle().apply { putString(ARG_INITIAL_NAME, initialName) }
+                arguments = Bundle().apply {
+                    putString(ARG_INITIAL_NAME, initialName)
+                    putInt(ARG_TITLE_RES, titleRes)
+                }
                 confirmResult = onConfirm
+                cancelResult = onCancel
             }
         }
     }
 
     private var viewBinding: DialogRenameFileBinding? = null
     private var confirmResult: ((String, (Boolean) -> Unit) -> Unit)? = null
+    private var cancelResult: (() -> Unit)? = null
     private val initialName by lazy { requireArguments().getString(ARG_INITIAL_NAME).orEmpty() }
+    private val titleRes by lazy { requireArguments().getInt(ARG_TITLE_RES, R.string.rename_file) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         viewBinding = DialogRenameFileBinding.inflate(inflater, container, false)
@@ -43,6 +56,8 @@ class RenameFileDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        dialog?.setCanceledOnTouchOutside(false)
+        dialog?.setCancelable(false)
         bindInitialName()
         bindActions()
         focusFileNameInput()
@@ -52,6 +67,7 @@ class RenameFileDialog : DialogFragment() {
      * 填充当前文件名并选中文本，方便用户直接编辑。
      */
     private fun bindInitialName() {
+        viewBinding?.dialogTitle?.setText(titleRes)
         viewBinding?.editFileName?.apply {
             setText(initialName)
             setSelection(0, text?.length ?: 0)
@@ -65,6 +81,7 @@ class RenameFileDialog : DialogFragment() {
         viewBinding?.apply {
             btnCancel.setOnClickListener {
                 hideKeyboard()
+                cancelResult?.invoke()
                 dismissAllowingStateLoss()
             }
             btnConfirm.setOnClickListener {
