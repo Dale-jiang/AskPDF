@@ -15,7 +15,7 @@ class SettingsPlaceholderFragment : BaseFragment<FragmentSettingsStubBinding>(Fr
     override fun initView(savedInstanceState: Bundle?) {
         binding.itemShareApp.setOnClickListener { shareAppLink() }
         binding.itemLanguage.setOnClickListener { }
-        binding.itemPrivacy.setOnClickListener { }
+        binding.itemPrivacy.setOnClickListener { openPrivacyPolicy() }
     }
 
     /**
@@ -33,5 +33,14 @@ class SettingsPlaceholderFragment : BaseFragment<FragmentSettingsStubBinding>(Fr
         }.onFailure {
             Toast.makeText(requireContext(), R.string.share_app_failed, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    /**
+     * 打开内置隐私政策页面。
+     */
+    private fun openPrivacyPolicy() {
+        startActivity(Intent(requireContext(), PolicyViewerActivity::class.java).apply {
+            putExtra(PolicyViewerActivity.EXTRA_PAGE_URL, PolicyViewerActivity.DEFAULT_PRIVACY_URL)
+        })
     }
 }
