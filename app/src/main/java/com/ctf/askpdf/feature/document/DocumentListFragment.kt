@@ -60,7 +60,11 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
                 openDocument(file)
             },
             moreClick = { file ->
-                showDocumentActionSheet(file)
+                if (documentTab == DocumentTab.COLLECTION) {
+                    viewModel.toggleCollection(file)
+                } else {
+                    showDocumentActionSheet(file)
+                }
             }
         )
         binding.recyclerView.itemAnimator = null
@@ -132,8 +136,13 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
         sheetBinding.btnPrint.isVisible = isPdf
         sheetBinding.printDivider.isVisible = isPdf
         sheetBinding.btnCollection.setOnClickListener {
-            viewModel.toggleCollection(file)
-            dialog.dismiss()
+            sheetBinding.btnCollection.isEnabled = false
+            viewModel.toggleCollection(file) { updatedFile ->
+                sheetBinding.btnCollection.setImageResource(
+                    if (updatedFile.collected) R.drawable.ic_collection_yes else R.drawable.ic_collection_no
+                )
+                dialog.dismiss()
+            }
         }
         sheetBinding.btnRename.setOnClickListener {
             dialog.dismiss()

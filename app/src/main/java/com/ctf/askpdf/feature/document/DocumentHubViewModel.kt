@@ -32,7 +32,7 @@ class DocumentHubViewModel : ViewModel() {
      */
     fun scanDocuments(context: Context) {
         viewModelScope.launch(Dispatchers.IO + SupervisorJob()) {
-            val scannedFiles = queryDocuments(context.contentResolver)
+            val scannedFiles = queryDocuments(context.contentResolver).map { mergeStoredState(it) }
             scannedFilesLiveData.postValue(scannedFiles)
         }
     }
@@ -80,20 +80,24 @@ class DocumentHubViewModel : ViewModel() {
     /**
      * 切换收藏状态，影响 Collection tab 的数据。
      */
-    fun toggleCollection(file: DocumentFile) {
+    fun toggleCollection(file: DocumentFile, onResult: (DocumentFile) -> Unit = {}) {
         viewModelScope.launch(Dispatchers.IO + SupervisorJob()) {
             val saved = askPdfDatabase.documentFileDao().findByPath(file.path) ?: file
             val nextCollected = saved.collected.not()
-            askPdfDatabase.documentFileDao().upsert(
-                saved.copy(
-                    displayName = file.displayName,
-                    mimeType = file.mimeType,
-                    size = file.size,
-                    dateAdded = file.dateAdded,
-                    collected = nextCollected,
-                    collectedAt = if (nextCollected) System.currentTimeMillis() else 0L
-                )
+            val updated = saved.copy(
+                displayName = file.displayName,
+                path = file.path,
+                mimeType = file.mimeType,
+                size = file.size,
+                dateAdded = file.dateAdded,
+                collected = nextCollected,
+                collectedAt = if (nextCollected) System.currentTimeMillis() else 0L
             )
+            askPdfDatabase.documentFileDao().upsert(updated)
+            replaceScannedFile(file.path, updated)
+            withContext(Dispatchers.Main) {
+                onResult(updated)
+            }
         }
     }
 
@@ -201,6 +205,19 @@ class DocumentHubViewModel : ViewModel() {
         val extension = originalName.substringAfterLast('.', missingDelimiterValue = "")
         if (extension.isBlank() || inputName.endsWith(".$extension", ignoreCase = true)) return inputName
         return "$inputName.$extension"
+    }
+
+    /**
+     * 合并数据库中已有的最近打开和收藏状态。
+     */
+    private suspend fun mergeStoredState(file: DocumentFile): DocumentFile {
+        val saved = askPdfDatabase.documentFileDao().findByPath(file.path) ?: return file
+        return file.copy(
+            id = saved.id,
+            recentViewTime = saved.recentViewTime,
+            collected = saved.collected,
+            collectedAt = saved.collectedAt
+        )
     }
 
     /**
