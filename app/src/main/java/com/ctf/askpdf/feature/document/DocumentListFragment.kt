@@ -1,15 +1,12 @@
 package com.ctf.askpdf.feature.document
 
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.print.PrintManager
-import android.text.InputType
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -21,11 +18,13 @@ import com.ctf.askpdf.document.model.DocumentFile
 import com.ctf.askpdf.document.model.DocumentKind
 import com.ctf.askpdf.document.model.DocumentTab
 import com.ctf.askpdf.document.print.DocumentPrintAdapter
+import com.ctf.askpdf.feature.read.DocReadActivity
+import com.ctf.askpdf.feature.read.PdfReadActivity
 import com.ctf.askpdf.presentation.adapter.DocumentFileAdapter
 import com.ctf.askpdf.presentation.base.BaseActivity
 import com.ctf.askpdf.presentation.base.BaseFragment
+import com.ctf.askpdf.presentation.dialog.RenameFileDialog
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
 
 class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentDocumentListBinding::inflate) {
@@ -58,7 +57,6 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
             context = requireContext(),
             tab = documentTab,
             itemClick = { file ->
-                viewModel.markAsRecent(file)
                 openDocument(file)
             },
             moreClick = { file ->
@@ -103,9 +101,24 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
     }
 
     /**
-     * 使用系统应用打开文档，失败时只提示不崩溃。
+     * 根据文件类型进入内置阅读页，未知类型回退到系统应用打开。
      */
     private fun openDocument(file: DocumentFile) {
+        when (file.resolveType()) {
+            DocumentKind.PDF -> {
+                startActivity(Intent(requireContext(), PdfReadActivity::class.java).apply {
+                    putExtra(PdfReadActivity.EXTRA_DOCUMENT_FILE, file)
+                })
+                return
+            }
+            DocumentKind.WORD, DocumentKind.EXCEL, DocumentKind.PPT -> {
+                startActivity(Intent(requireContext(), DocReadActivity::class.java).apply {
+                    putExtra(DocReadActivity.EXTRA_DOCUMENT_FILE, file)
+                })
+                return
+            }
+            else -> Unit
+        }
         runCatching {
             val uri = FileProvider.getUriForFile(
                 requireContext(),
@@ -116,6 +129,7 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
                 setDataAndType(uri, file.mimeType.ifBlank { "*/*" })
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             })
+            viewModel.markAsRecent(file)
         }.onFailure {
             Toast.makeText(requireContext(), R.string.open_file_failed, Toast.LENGTH_SHORT).show()
         }
@@ -174,30 +188,15 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
      * 弹出重命名输入框，并提交新的文件名。
      */
     private fun showRenameDialog(file: DocumentFile) {
-        val inputView = AppCompatEditText(requireContext()).apply {
-            setSingleLine(true)
-            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
-            hint = getString(R.string.file_name)
-            setText(file.displayName.substringBeforeLast('.', file.displayName))
-            setSelection(0, text?.length ?: 0)
-            setPadding(40, 30, 40, 30)
-        }
-        val dialog = MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.rename_file)
-            .setView(inputView)
-            .setNegativeButton(R.string.cancel, null)
-            .setPositiveButton(R.string.confirm, null)
-            .show()
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
-            val nextName = inputView.text?.toString().orEmpty()
+        val baseName = file.displayName.substringBeforeLast('.', file.displayName)
+        RenameFileDialog.newInstance(baseName) { nextName, onHandled ->
             viewModel.renameDocument(requireContext(), file, nextName) { success, errorRes ->
-                if (success) {
-                    dialog.dismiss()
-                } else if (errorRes != null) {
+                if (success.not() && errorRes != null) {
                     Toast.makeText(requireContext(), errorRes, Toast.LENGTH_SHORT).show()
                 }
+                onHandled(success)
             }
-        }
+        }.show(parentFragmentManager, "rename_file")
     }
 
     /**

@@ -62,6 +62,18 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".feature.read.PdfReadActivity"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".feature.read.DocReadActivity"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".presentation.permission.StoragePermissionAskActivity"
             android:configChanges="screenSize|orientation|keyboard"
             android:launchMode="singleTop"
