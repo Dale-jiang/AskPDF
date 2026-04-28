@@ -165,6 +165,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
      * 切换首页底部 tab 的选中颜色和图标颜色。
      */
     private fun selectMainTab(selectedIndex: Int) {
+        updateHeaderTitle(selectedIndex)
         val activeColor = ContextCompat.getColor(this, R.color.main_tab_active)
         val inactiveColor = ContextCompat.getColor(this, R.color.main_tab_inactive)
         mainTabs.forEachIndexed { index, tab ->
@@ -172,6 +173,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             tab.view.setTextColor(tintColor)
             tab.view.setTintedTopDrawable(tab.iconRes, tintColor)
         }
+    }
+
+    /**
+     * 根据当前主 tab 更新顶部标题，Home 显示应用名。
+     */
+    private fun updateHeaderTitle(selectedIndex: Int) {
+        val titleRes = when (selectedIndex) {
+            1 -> R.string.tab_recent_files
+            2 -> R.string.tab_collection
+            3 -> R.string.tab_settings
+            else -> R.string.app_name
+        }
+        binding.appName.setText(titleRes)
     }
 
     /**

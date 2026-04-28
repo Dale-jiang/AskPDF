@@ -1,5 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/page_bg_color" />
+    android:paddingTop="16dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/item_share_app"
+        style="@style/SettingsListItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            style="@style/SettingsListIcon"
+            app:srcCompat="@drawable/ic_settings_share" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/SettingsListText"
+            android:text="@string/share_app" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            style="@style/SettingsListArrow"
+            app:srcCompat="@drawable/ic_arrow_right" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/item_language"
+        style="@style/SettingsListItem"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_share_app">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            style="@style/SettingsListIcon"
+            app:srcCompat="@drawable/ic_settings_language" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/SettingsListText"
+            android:text="@string/language" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            style="@style/SettingsListArrow"
+            app:srcCompat="@drawable/ic_arrow_right" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/item_privacy"
+        style="@style/SettingsListItem"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_language">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            style="@style/SettingsListIcon"
+            app:srcCompat="@drawable/ic_settings_privacy" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/SettingsListText"
+            android:text="@string/privacy_policy" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            style="@style/SettingsListArrow"
+            app:srcCompat="@drawable/ic_arrow_right" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>

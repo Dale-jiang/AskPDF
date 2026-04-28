@@ -31,4 +31,10 @@
     <string name="delete_file_failed">Unable to delete this file</string>
     <string name="share_file_failed">Unable to share this file</string>
     <string name="print_file_failed">Unable to print this file</string>
+    <string name="share_app">Share App</string>
+    <string name="language">Language</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="check_out_this_app">Check out this app</string>
+    <string name="share_app_text">I found this useful app: %1$s</string>
+    <string name="share_app_failed">Unable to share this app</string>
 </resources>
