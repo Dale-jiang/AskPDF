@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
+import com.ctf.askpdf.app.AppLifecycleUtils
 import com.ctf.askpdf.databinding.ActivityPermissionAskBinding
 import com.ctf.askpdf.presentation.base.BaseActivity
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +25,7 @@ class StoragePermissionAskActivity : BaseActivity<ActivityPermissionAskBinding>(
     override fun onResume() {
         super.onResume()
         if (openedSettings) {
+            AppLifecycleUtils.markNavigatingToSetting(false)
             finish()
             return
         }
@@ -35,6 +37,7 @@ class StoragePermissionAskActivity : BaseActivity<ActivityPermissionAskBinding>(
 
     @SuppressLint("InlinedApi")
     private fun openStorageSettings() {
+        AppLifecycleUtils.markNavigatingToSetting(true)
         runCatching {
             startActivity(Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
                 data = "package:$packageName".toUri()

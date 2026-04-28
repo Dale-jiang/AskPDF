@@ -1,5 +1,6 @@
 package com.ctf.askpdf.presentation.base
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewbinding.ViewBinding
+import com.ctf.askpdf.core.locale.AppLanguageConfig
+import com.ctf.askpdf.data.local.selectedLanguageTag
 
 abstract class BaseActivity<VB : ViewBinding>(
     private val inflateBinding: (LayoutInflater) -> VB
@@ -15,6 +18,11 @@ abstract class BaseActivity<VB : ViewBinding>(
 
     protected lateinit var binding: VB
         private set
+
+    override fun attachBaseContext(newBase: Context) {
+        val languageTag = AppLanguageConfig.resolveLanguageTag(selectedLanguageTag)
+        super.attachBaseContext(AppLanguageConfig.wrapContext(newBase, languageTag))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
