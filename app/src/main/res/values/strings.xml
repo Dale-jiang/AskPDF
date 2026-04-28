@@ -17,4 +17,18 @@
     <string name="no_history_yet">No recent files yet</string>
     <string name="no_bookmarks_yet">No collected files yet</string>
     <string name="open_file_failed">Unable to open this file</string>
+    <string name="rename">Rename</string>
+    <string name="share">Share</string>
+    <string name="print">Print</string>
+    <string name="delete">Delete</string>
+    <string name="rename_file">Rename file</string>
+    <string name="file_name">File name</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="file_name_empty">File name cannot be empty</string>
+    <string name="file_name_exists">A file with this name already exists</string>
+    <string name="rename_file_failed">Unable to rename this file</string>
+    <string name="delete_file_failed">Unable to delete this file</string>
+    <string name="share_file_failed">Unable to share this file</string>
+    <string name="print_file_failed">Unable to print this file</string>
 </resources>

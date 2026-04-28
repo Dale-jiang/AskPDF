@@ -1,18 +1,29 @@
 package com.ctf.askpdf.feature.document
 
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.print.PrintManager
+import android.text.InputType
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import com.ctf.askpdf.R
+import com.ctf.askpdf.databinding.DialogDocumentFileActionsBinding
 import com.ctf.askpdf.databinding.FragmentDocumentListBinding
 import com.ctf.askpdf.document.model.DocumentFile
 import com.ctf.askpdf.document.model.DocumentKind
 import com.ctf.askpdf.document.model.DocumentTab
+import com.ctf.askpdf.document.print.DocumentPrintAdapter
 import com.ctf.askpdf.presentation.adapter.DocumentFileAdapter
 import com.ctf.askpdf.presentation.base.BaseFragment
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
 
 class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentDocumentListBinding::inflate) {
@@ -49,7 +60,7 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
                 openDocument(file)
             },
             moreClick = { file ->
-                viewModel.toggleCollection(file)
+                showDocumentActionSheet(file)
             }
         )
         binding.recyclerView.itemAnimator = null
@@ -96,6 +107,124 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
             })
         }.onFailure {
             Toast.makeText(requireContext(), R.string.open_file_failed, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    /**
+     * 展示文件更多操作弹窗，并绑定各操作入口。
+     */
+    private fun showDocumentActionSheet(file: DocumentFile) {
+        val sheetBinding = DialogDocumentFileActionsBinding.inflate(layoutInflater)
+        val dialog = BottomSheetDialog(requireContext()).apply {
+            setContentView(sheetBinding.root)
+            setOnShowListener {
+                findViewById<android.widget.FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
+                    ?.background = ColorDrawable(Color.TRANSPARENT)
+            }
+        }
+        sheetBinding.dialogFileIcon.setImageResource(file.resolveType()?.iconRes ?: R.drawable.ic_pdf)
+        sheetBinding.dialogFileName.text = file.displayName
+        sheetBinding.dialogFilePath.text = file.path
+        sheetBinding.btnCollection.setImageResource(
+            if (file.collected || documentTab == DocumentTab.COLLECTION) R.drawable.ic_collection_yes else R.drawable.ic_collection_no
+        )
+        val isPdf = file.resolveType() == DocumentKind.PDF
+        sheetBinding.btnPrint.isVisible = isPdf
+        sheetBinding.printDivider.isVisible = isPdf
+        sheetBinding.btnCollection.setOnClickListener {
+            viewModel.toggleCollection(file)
+            dialog.dismiss()
+        }
+        sheetBinding.btnRename.setOnClickListener {
+            dialog.dismiss()
+            showRenameDialog(file)
+        }
+        sheetBinding.btnShare.setOnClickListener {
+            dialog.dismiss()
+            shareDocument(file)
+        }
+        sheetBinding.btnPrint.setOnClickListener {
+            dialog.dismiss()
+            printDocument(file)
+        }
+        sheetBinding.btnDelete.setOnClickListener {
+            dialog.dismiss()
+            deleteDocument(file)
+        }
+        dialog.show()
+    }
+
+    /**
+     * 弹出重命名输入框，并提交新的文件名。
+     */
+    private fun showRenameDialog(file: DocumentFile) {
+        val inputView = AppCompatEditText(requireContext()).apply {
+            setSingleLine(true)
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+            hint = getString(R.string.file_name)
+            setText(file.displayName.substringBeforeLast('.', file.displayName))
+            setSelection(0, text?.length ?: 0)
+            setPadding(40, 18, 40, 18)
+        }
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.rename_file)
+            .setView(inputView)
+            .setNegativeButton(R.string.cancel, null)
+            .setPositiveButton(R.string.confirm, null)
+            .show()
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+            val nextName = inputView.text?.toString().orEmpty()
+            viewModel.renameDocument(requireContext(), file, nextName) { success, errorRes ->
+                if (success) {
+                    dialog.dismiss()
+                } else if (errorRes != null) {
+                    Toast.makeText(requireContext(), errorRes, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    /**
+     * 通过系统分享面板发送当前文件。
+     */
+    private fun shareDocument(file: DocumentFile) {
+        runCatching {
+            val uri = FileProvider.getUriForFile(
+                requireContext(),
+                "${requireContext().packageName}.fileProvider",
+                File(file.path)
+            )
+            val sendIntent = Intent(Intent.ACTION_SEND).apply {
+                type = file.mimeType.ifBlank { "*/*" }
+                putExtra(Intent.EXTRA_STREAM, uri)
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
+            startActivity(Intent.createChooser(sendIntent, getString(R.string.share)))
+        }.onFailure {
+            Toast.makeText(requireContext(), R.string.share_file_failed, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    /**
+     * 调起系统打印服务打印 PDF 文件。
+     */
+    private fun printDocument(file: DocumentFile) {
+        runCatching {
+            val printManager = requireContext().getSystemService(Context.PRINT_SERVICE) as PrintManager
+            printManager.print(file.displayName, DocumentPrintAdapter(File(file.path), file.displayName), null)
+        }.onFailure {
+            Toast.makeText(requireContext(), R.string.print_file_failed, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    /**
+     * 删除当前文件，并在失败时提示用户。
+     */
+    private fun deleteDocument(file: DocumentFile) {
+        viewModel.deleteDocument(requireContext(), file) { success, errorRes ->
+            if (success.not() && errorRes != null) {
+                Toast.makeText(requireContext(), errorRes, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

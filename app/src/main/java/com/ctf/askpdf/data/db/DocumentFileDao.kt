@@ -15,6 +15,12 @@ interface DocumentFileDao {
     @Query("SELECT * FROM document_file WHERE path = :path LIMIT 1")
     suspend fun findByPath(path: String): DocumentFile?
 
+    /**
+     * 按文件路径删除数据库记录。
+     */
+    @Query("DELETE FROM document_file WHERE path = :path")
+    suspend fun deleteByPath(path: String)
+
     @Query("SELECT * FROM document_file WHERE recentViewTime > 0 ORDER BY recentViewTime DESC")
     fun observeRecentFiles(): Flow<List<DocumentFile>>
 
