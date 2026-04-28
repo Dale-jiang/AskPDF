@@ -173,7 +173,7 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
             hint = getString(R.string.file_name)
             setText(file.displayName.substringBeforeLast('.', file.displayName))
             setSelection(0, text?.length ?: 0)
-            setPadding(40, 18, 40, 18)
+            setPadding(40, 30, 40, 30)
         }
         val dialog = MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.rename_file)
