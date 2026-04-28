@@ -10,6 +10,8 @@
     <string name="no_files_tips">No se encontraron documentos compatibles</string>
     <string name="no_history_yet">No hay archivos recientes</string>
     <string name="no_bookmarks_yet">No hay archivos guardados</string>
+    <string name="collection_success">Añadido a la colección</string>
+    <string name="collection_cancelled">Eliminado de la colección</string>
     <string name="open_file_failed">No se puede abrir este archivo</string>
     <string name="rename">Renombrar</string>
     <string name="share">Compartir</string>

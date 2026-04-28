@@ -10,6 +10,8 @@
     <string name="no_files_tips">対応する文書が見つかりません</string>
     <string name="no_history_yet">最近のファイルはありません</string>
     <string name="no_bookmarks_yet">保存されたファイルはありません</string>
+    <string name="collection_success">コレクションに追加しました</string>
+    <string name="collection_cancelled">コレクションから削除しました</string>
     <string name="open_file_failed">このファイルを開けません</string>
     <string name="rename">名前を変更</string>
     <string name="share">共有</string>

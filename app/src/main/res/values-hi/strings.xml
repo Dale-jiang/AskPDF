@@ -10,6 +10,8 @@
     <string name="no_files_tips">कोई समर्थित दस्तावेज़ नहीं मिला</string>
     <string name="no_history_yet">अभी कोई हाल की फाइल नहीं</string>
     <string name="no_bookmarks_yet">अभी कोई सहेजी गई फाइल नहीं</string>
+    <string name="collection_success">संग्रह में जोड़ा गया</string>
+    <string name="collection_cancelled">संग्रह से हटाया गया</string>
     <string name="open_file_failed">यह फाइल नहीं खुल सकी</string>
     <string name="rename">नाम बदलें</string>
     <string name="share">शेयर करें</string>

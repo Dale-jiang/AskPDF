@@ -10,6 +10,8 @@
     <string name="no_files_tips">ไม่พบเอกสารที่รองรับ</string>
     <string name="no_history_yet">ยังไม่มีไฟล์ล่าสุด</string>
     <string name="no_bookmarks_yet">ยังไม่มีไฟล์ที่บันทึกไว้</string>
+    <string name="collection_success">เพิ่มลงในรายการโปรดแล้ว</string>
+    <string name="collection_cancelled">นำออกจากรายการโปรดแล้ว</string>
     <string name="open_file_failed">ไม่สามารถเปิดไฟล์นี้ได้</string>
     <string name="rename">เปลี่ยนชื่อ</string>
     <string name="share">แชร์</string>

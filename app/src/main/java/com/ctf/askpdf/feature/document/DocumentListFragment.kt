@@ -61,7 +61,9 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
             },
             moreClick = { file ->
                 if (documentTab == DocumentTab.COLLECTION) {
-                    viewModel.toggleCollection(file)
+                    viewModel.toggleCollection(file) { updatedFile ->
+                        showCollectionSuccessToast(updatedFile)
+                    }
                 } else {
                     showDocumentActionSheet(file)
                 }
@@ -162,6 +164,7 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
                 sheetBinding.btnCollection.setImageResource(
                     if (updatedFile.collected) R.drawable.ic_collection_yes else R.drawable.ic_collection_no
                 )
+                showCollectionSuccessToast(updatedFile)
                 dialog.dismiss()
             }
         }
@@ -182,6 +185,14 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
             deleteDocument(file)
         }
         dialog.show()
+    }
+
+    /**
+     * 根据收藏状态变化提示用户操作结果。
+     */
+    private fun showCollectionSuccessToast(file: DocumentFile) {
+        val messageRes = if (file.collected) R.string.collection_success else R.string.collection_cancelled
+        Toast.makeText(requireContext(), messageRes, Toast.LENGTH_SHORT).show()
     }
 
     /**

@@ -14,6 +14,8 @@
     <string name="no_files_tips">No supported documents found</string>
     <string name="no_history_yet">No recent files yet</string>
     <string name="no_bookmarks_yet">No collected files yet</string>
+    <string name="collection_success">Added to collection</string>
+    <string name="collection_cancelled">Removed from collection</string>
     <string name="open_file_failed">Unable to open this file</string>
     <string name="rename">Rename</string>
     <string name="share">Share</string>
