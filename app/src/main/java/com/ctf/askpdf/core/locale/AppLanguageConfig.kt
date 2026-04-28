@@ -13,6 +13,8 @@ object AppLanguageConfig {
 
     val supportedLanguages = listOf(
         AppLanguage("English", "en"),
+        AppLanguage("简体中文", "zh"),
+        AppLanguage("繁體中文（香港）", "zh-HK"),
         AppLanguage("繁體中文", "zh-TW"),
         AppLanguage("日本語", "ja"),
         AppLanguage("한국어", "ko"),
