@@ -33,6 +33,7 @@
     <string name="print_file_failed">Unable to print this file</string>
     <string name="pdf_password_title">PDF Password</string>
     <string name="enter_password_to_view_pdf">Enter password to view PDF</string>
+    <string name="password_required_for_pdf">Password required for: %1$s</string>
     <string name="please_enter_password">Please enter password</string>
     <string name="incorrect_password">Incorrect password</string>
     <string name="create_pdf">Create PDF</string>
@@ -44,10 +45,24 @@
     <string name="create_success_title">PDF Created</string>
     <string name="create_success_message">Your scanned document is ready.</string>
     <string name="open_pdf">Open PDF</string>
+    <string name="merge_pdf">Merge PDF</string>
+    <string name="split_pdf">Split PDF</string>
+    <string name="split_coming_soon">Split PDF is not available yet</string>
+    <string name="merge_selection_count">Selected %1$d/%2$d. Choose at least 2 PDFs.</string>
+    <string name="no_pdf_files">No PDF files found</string>
+    <string name="merge_requires_two">Select at least 2 PDFs to merge</string>
+    <string name="merge_cancelled">Merge cancelled</string>
+    <string name="merging_pdf">Merging PDF...</string>
+    <string name="pdf_merge_failed">Unable to merge PDF files</string>
+    <string name="pdf_merge_success_title">PDF Merged</string>
+    <string name="pdf_merge_success_message">Your merged PDF is ready.</string>
+    <string name="merge_max_selected">You can select up to %1$d PDFs</string>
     <string name="share_app">Share App</string>
     <string name="language">Language</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="check_out_this_app">Check out this app</string>
     <string name="share_app_text">I found this useful app: %1$s</string>
     <string name="share_app_failed">Unable to share this app</string>
+    <string name="merge">Merge</string>
+    <string name="split">Split</string>
 </resources>

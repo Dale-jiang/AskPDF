@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.ctf.askpdf.R
@@ -21,10 +22,18 @@ class PdfPasswordDialog : DialogFragment() {
 
     companion object {
         private const val ARG_PATH = "arg_path"
+        private const val ARG_DISPLAY_NAME = "arg_display_name"
 
-        fun newInstance(path: String, onResult: (String?) -> Unit): PdfPasswordDialog {
+        fun newInstance(
+            path: String,
+            displayName: String? = null,
+            onResult: (String?) -> Unit
+        ): PdfPasswordDialog {
             return PdfPasswordDialog().apply {
-                arguments = Bundle().apply { putString(ARG_PATH, path) }
+                arguments = Bundle().apply {
+                    putString(ARG_PATH, path)
+                    putString(ARG_DISPLAY_NAME, displayName)
+                }
                 passwordResult = onResult
             }
         }
@@ -33,6 +42,7 @@ class PdfPasswordDialog : DialogFragment() {
     private var viewBinding: DialogPdfPasswordBinding? = null
     private var passwordResult: ((String?) -> Unit)? = null
     private val pdfPath by lazy { requireArguments().getString(ARG_PATH).orEmpty() }
+    private val displayName by lazy { requireArguments().getString(ARG_DISPLAY_NAME).orEmpty() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         viewBinding = DialogPdfPasswordBinding.inflate(inflater, container, false)
@@ -52,8 +62,19 @@ class PdfPasswordDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         dialog?.setCanceledOnTouchOutside(false)
         dialog?.setCancelable(false)
+        bindDisplayName()
         bindActions()
         focusPasswordInput()
+    }
+
+    /**
+     * 展示当前需要密码的 PDF 名称，空名称时保持阅读弹窗原样。
+     */
+    private fun bindDisplayName() {
+        viewBinding?.fileNameTips?.apply {
+            isVisible = displayName.isNotBlank()
+            text = if (displayName.isBlank()) "" else getString(R.string.password_required_for_pdf, displayName)
+        }
     }
 
     /**

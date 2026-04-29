@@ -85,10 +85,33 @@
             tools:text="/storage/emulated/0/Download/Monthly report.pdf" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="14dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_merge"
+        style="@style/DocumentActionItem"
+        android:text="@string/merge_pdf"
+        app:drawableStartCompat="@drawable/ic_merge" />
+
+    <View
+        android:id="@+id/merge_divider"
+        style="@style/DocumentActionDivider" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_split"
+        style="@style/DocumentActionItem"
+        android:text="@string/split_pdf"
+        app:drawableStartCompat="@drawable/ic_split" />
+
+    <View
+        android:id="@+id/split_divider"
+        style="@style/DocumentActionDivider" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_rename"
         style="@style/DocumentActionItem"
-        android:layout_marginTop="14dp"
         android:text="@string/rename"
         app:drawableStartCompat="@drawable/ic_rename" />
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.ctf.askpdf.R
 import com.ctf.askpdf.databinding.FragmentSettingsStubBinding
+import com.ctf.askpdf.feature.merge.MergePdfActivity
 import com.ctf.askpdf.presentation.base.BaseFragment
 
 class SettingsPlaceholderFragment : BaseFragment<FragmentSettingsStubBinding>(FragmentSettingsStubBinding::inflate) {
@@ -16,6 +17,8 @@ class SettingsPlaceholderFragment : BaseFragment<FragmentSettingsStubBinding>(Fr
         binding.itemShareApp.setOnClickListener { shareAppLink() }
         binding.itemLanguage.setOnClickListener { openLanguageSettings() }
         binding.itemPrivacy.setOnClickListener { openPrivacyPolicy() }
+        binding.itemMerge.setOnClickListener { openMergePdfPage() }
+        binding.itemSplit.setOnClickListener { openSplitPdfPage() }
     }
 
     /**
@@ -49,5 +52,19 @@ class SettingsPlaceholderFragment : BaseFragment<FragmentSettingsStubBinding>(Fr
      */
     private fun openLanguageSettings() {
         startActivity(Intent(requireContext(), LanguageSettingsActivity::class.java))
+    }
+
+    /**
+     * 从设置页进入 PDF 合并选择页。
+     */
+    private fun openMergePdfPage() {
+        startActivity(Intent(requireContext(), MergePdfActivity::class.java))
+    }
+
+    /**
+     * 提示拆分 PDF 功能暂未开放，避免设置页入口无响应。
+     */
+    private fun openSplitPdfPage() {
+        Toast.makeText(requireContext(), R.string.split_coming_soon, Toast.LENGTH_SHORT).show()
     }
 }

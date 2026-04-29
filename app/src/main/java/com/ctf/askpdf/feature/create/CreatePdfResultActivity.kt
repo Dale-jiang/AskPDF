@@ -16,9 +16,13 @@ class CreatePdfResultActivity : BaseActivity<ActivityCreatePdfResultBinding>(Act
 
     companion object {
         const val EXTRA_DOCUMENT_FILE = "extra_document_file"
+        const val EXTRA_TITLE_RES = "extra_title_res"
+        const val EXTRA_MESSAGE_RES = "extra_message_res"
     }
 
     private val documentFile by lazy { intent?.getParcelableExtra<DocumentFile>(EXTRA_DOCUMENT_FILE) }
+    private val titleRes by lazy { intent.getIntExtra(EXTRA_TITLE_RES, R.string.create_success_title) }
+    private val messageRes by lazy { intent.getIntExtra(EXTRA_MESSAGE_RES, R.string.create_success_message) }
 
     /**
      * 将状态栏安全区应用到顶部栏，保持结果页顶部颜色完整。
@@ -41,8 +45,8 @@ class CreatePdfResultActivity : BaseActivity<ActivityCreatePdfResultBinding>(Act
      * 展示创建成功的文件信息，并绑定打开按钮。
      */
     private fun bindResult(file: DocumentFile) {
-        binding.resultTitle.setText(R.string.create_success_title)
-        binding.resultSubtitle.setText(R.string.create_success_message)
+        binding.resultTitle.setText(titleRes)
+        binding.resultSubtitle.setText(messageRes)
         binding.fileName.text = file.displayName
         binding.filePath.text = file.path
         binding.btnOpen.setOnClickListener {

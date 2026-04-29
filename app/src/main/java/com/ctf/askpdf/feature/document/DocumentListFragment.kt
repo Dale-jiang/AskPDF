@@ -18,6 +18,7 @@ import com.ctf.askpdf.document.model.DocumentFile
 import com.ctf.askpdf.document.model.DocumentKind
 import com.ctf.askpdf.document.model.DocumentTab
 import com.ctf.askpdf.document.print.DocumentPrintAdapter
+import com.ctf.askpdf.feature.merge.MergePdfActivity
 import com.ctf.askpdf.feature.read.DocReadActivity
 import com.ctf.askpdf.feature.read.PdfReadActivity
 import com.ctf.askpdf.presentation.adapter.DocumentFileAdapter
@@ -158,6 +159,10 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
         val isPdf = file.resolveType() == DocumentKind.PDF
         sheetBinding.btnPrint.isVisible = isPdf
         sheetBinding.printDivider.isVisible = isPdf
+        sheetBinding.btnMerge.isVisible = isPdf
+        sheetBinding.mergeDivider.isVisible = isPdf
+        sheetBinding.btnSplit.isVisible = isPdf
+        sheetBinding.splitDivider.isVisible = isPdf
         sheetBinding.btnCollection.setOnClickListener {
             sheetBinding.btnCollection.isEnabled = false
             viewModel.toggleCollection(file) { updatedFile ->
@@ -180,11 +185,35 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
             dialog.dismiss()
             printDocument(file)
         }
+        sheetBinding.btnMerge.setOnClickListener {
+            dialog.dismiss()
+            openMergePdfPage(file)
+        }
+        sheetBinding.btnSplit.setOnClickListener {
+            dialog.dismiss()
+            openSplitPdfPage()
+        }
         sheetBinding.btnDelete.setOnClickListener {
             dialog.dismiss()
             deleteDocument(file)
         }
         dialog.show()
+    }
+
+    /**
+     * 打开 PDF 合并页，并预选当前文件。
+     */
+    private fun openMergePdfPage(file: DocumentFile) {
+        startActivity(Intent(requireContext(), MergePdfActivity::class.java).apply {
+            putExtra(MergePdfActivity.EXTRA_PRESELECTED_PATH, file.path)
+        })
+    }
+
+    /**
+     * 提示拆分 PDF 功能暂未开放，保证入口点击有明确反馈。
+     */
+    private fun openSplitPdfPage() {
+        Toast.makeText(requireContext(), R.string.split_coming_soon, Toast.LENGTH_SHORT).show()
     }
 
     /**
