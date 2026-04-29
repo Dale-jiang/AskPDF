@@ -48,6 +48,16 @@
     <string name="merge_pdf">PDFを結合</string>
     <string name="split_pdf">PDFを分割</string>
     <string name="split_coming_soon">PDF分割はまだ利用できません</string>
+    <string name="split_select_pdf_tips">分割するPDFを1件選択してください。</string>
+    <string name="split_select_pdf_first">先にPDFを選択してください</string>
+    <string name="one_page_tips">このPDFは1ページのみのため分割できません。</string>
+    <string name="pdf_split_failed">PDFを分割できません</string>
+    <string name="splitting_pdf">PDFを分割中...</string>
+    <string name="split_page_number">ページ %1$d</string>
+    <string name="split_selected_count">%1$d/%2$dページを選択中</string>
+    <string name="split_no_page_selected">分割するページを1つ以上選択してください</string>
+    <string name="pdf_split_success_title">PDFを分割しました</string>
+    <string name="pdf_split_success_message">分割したPDFの準備ができました。</string>
     <string name="merge_selection_count">%1$d/%2$d件を選択中。2件以上のPDFを選択してください。</string>
     <string name="no_pdf_files">PDFファイルが見つかりません</string>
     <string name="merge_requires_two">結合するには2件以上のPDFを選択してください</string>

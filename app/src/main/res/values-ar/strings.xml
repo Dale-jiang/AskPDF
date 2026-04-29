@@ -48,6 +48,16 @@
     <string name="merge_pdf">دمج PDF</string>
     <string name="split_pdf">تقسيم PDF</string>
     <string name="split_coming_soon">تقسيم PDF غير متاح بعد</string>
+    <string name="split_select_pdf_tips">اختر ملف PDF واحدًا لتقسيمه.</string>
+    <string name="split_select_pdf_first">يرجى اختيار ملف PDF أولاً</string>
+    <string name="one_page_tips">يحتوي ملف PDF هذا على صفحة واحدة فقط ولا يمكن تقسيمه.</string>
+    <string name="pdf_split_failed">تعذر تقسيم PDF</string>
+    <string name="splitting_pdf">جارٍ تقسيم PDF...</string>
+    <string name="split_page_number">الصفحة %1$d</string>
+    <string name="split_selected_count">تم تحديد %1$d/%2$d صفحات</string>
+    <string name="split_no_page_selected">اختر صفحة واحدة على الأقل للتقسيم</string>
+    <string name="pdf_split_success_title">تم تقسيم PDF</string>
+    <string name="pdf_split_success_message">ملف PDF المقسم جاهز.</string>
     <string name="merge_selection_count">تم تحديد %1$d/%2$d. اختر ملفي PDF على الأقل.</string>
     <string name="no_pdf_files">لم يتم العثور على ملفات PDF</string>
     <string name="merge_requires_two">اختر ملفي PDF على الأقل للدمج</string>

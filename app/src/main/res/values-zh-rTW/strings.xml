@@ -52,6 +52,16 @@
     <string name="merge_pdf">合併 PDF</string>
     <string name="split_pdf">分割 PDF</string>
     <string name="split_coming_soon">分割 PDF 功能尚未開放</string>
+    <string name="split_select_pdf_tips">選擇一個 PDF 進行分割。</string>
+    <string name="split_select_pdf_first">請先選擇一個 PDF</string>
+    <string name="one_page_tips">此 PDF 只有 1 頁，無法分割。</string>
+    <string name="pdf_split_failed">無法分割 PDF</string>
+    <string name="splitting_pdf">正在分割 PDF...</string>
+    <string name="split_page_number">第 %1$d 頁</string>
+    <string name="split_selected_count">已選擇 %1$d/%2$d 頁</string>
+    <string name="split_no_page_selected">請至少選擇一頁進行分割</string>
+    <string name="pdf_split_success_title">PDF 已分割</string>
+    <string name="pdf_split_success_message">分割後的 PDF 已準備就緒。</string>
     <string name="merge_selection_count">已選擇 %1$d/%2$d 個，請至少選擇 2 個 PDF。</string>
     <string name="no_pdf_files">找不到 PDF 檔案</string>
     <string name="merge_requires_two">請至少選擇 2 個 PDF 進行合併</string>

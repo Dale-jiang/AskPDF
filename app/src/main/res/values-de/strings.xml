@@ -48,6 +48,16 @@
     <string name="merge_pdf">PDF zusammenführen</string>
     <string name="split_pdf">PDF teilen</string>
     <string name="split_coming_soon">PDF teilen ist noch nicht verfügbar</string>
+    <string name="split_select_pdf_tips">Wählen Sie eine PDF zum Teilen aus.</string>
+    <string name="split_select_pdf_first">Bitte zuerst eine PDF auswählen</string>
+    <string name="one_page_tips">Diese PDF hat nur eine Seite und kann nicht geteilt werden.</string>
+    <string name="pdf_split_failed">PDF kann nicht geteilt werden</string>
+    <string name="splitting_pdf">PDF wird geteilt...</string>
+    <string name="split_page_number">Seite %1$d</string>
+    <string name="split_selected_count">%1$d/%2$d Seiten ausgewählt</string>
+    <string name="split_no_page_selected">Wählen Sie mindestens eine Seite zum Teilen aus</string>
+    <string name="pdf_split_success_title">PDF geteilt</string>
+    <string name="pdf_split_success_message">Ihre geteilte PDF ist bereit.</string>
     <string name="merge_selection_count">%1$d/%2$d ausgewählt. Wählen Sie mindestens 2 PDFs aus.</string>
     <string name="no_pdf_files">Keine PDF-Dateien gefunden</string>
     <string name="merge_requires_two">Wählen Sie mindestens 2 PDFs zum Zusammenführen aus</string>

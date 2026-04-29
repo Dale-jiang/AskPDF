@@ -50,6 +50,16 @@
     <string name="merge_pdf">Merge PDF</string>
     <string name="split_pdf">Split PDF</string>
     <string name="split_coming_soon">Split PDF is not available yet</string>
+    <string name="split_select_pdf_tips">Select one PDF to split.</string>
+    <string name="split_select_pdf_first">Please select a PDF first</string>
+    <string name="one_page_tips">This PDF has only one page and cannot be split.</string>
+    <string name="pdf_split_failed">Unable to split PDF</string>
+    <string name="splitting_pdf">Splitting PDF...</string>
+    <string name="split_page_number">Page %1$d</string>
+    <string name="split_selected_count">Selected %1$d/%2$d pages</string>
+    <string name="split_no_page_selected">Select at least one page to split</string>
+    <string name="pdf_split_success_title">PDF Split</string>
+    <string name="pdf_split_success_message">Your split PDF is ready.</string>
     <string name="merge_selection_count">Selected %1$d/%2$d. Choose at least 2 PDFs.</string>
     <string name="no_pdf_files">No PDF files found</string>
     <string name="merge_requires_two">Select at least 2 PDFs to merge</string>

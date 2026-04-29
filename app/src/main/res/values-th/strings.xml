@@ -48,6 +48,16 @@
     <string name="merge_pdf">รวม PDF</string>
     <string name="split_pdf">แยก PDF</string>
     <string name="split_coming_soon">ยังไม่สามารถแยก PDF ได้ในตอนนี้</string>
+    <string name="split_select_pdf_tips">เลือก PDF หนึ่งไฟล์เพื่อแยก</string>
+    <string name="split_select_pdf_first">โปรดเลือก PDF ก่อน</string>
+    <string name="one_page_tips">PDF นี้มีเพียงหน้าเดียว จึงไม่สามารถแยกได้</string>
+    <string name="pdf_split_failed">ไม่สามารถแยก PDF ได้</string>
+    <string name="splitting_pdf">กำลังแยก PDF...</string>
+    <string name="split_page_number">หน้า %1$d</string>
+    <string name="split_selected_count">เลือกแล้ว %1$d/%2$d หน้า</string>
+    <string name="split_no_page_selected">เลือกอย่างน้อยหนึ่งหน้าเพื่อแยก</string>
+    <string name="pdf_split_success_title">แยก PDF แล้ว</string>
+    <string name="pdf_split_success_message">PDF ที่แยกแล้วของคุณพร้อมแล้ว</string>
     <string name="merge_selection_count">เลือกแล้ว %1$d/%2$d โปรดเลือก PDF อย่างน้อย 2 ไฟล์</string>
     <string name="no_pdf_files">ไม่พบไฟล์ PDF</string>
     <string name="merge_requires_two">เลือก PDF อย่างน้อย 2 ไฟล์เพื่อรวม</string>

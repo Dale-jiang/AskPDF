@@ -48,6 +48,16 @@
     <string name="merge_pdf">Gabungkan PDF</string>
     <string name="split_pdf">Pisahkan PDF</string>
     <string name="split_coming_soon">Pisahkan PDF belum tersedia</string>
+    <string name="split_select_pdf_tips">Pilih satu PDF untuk dipisahkan.</string>
+    <string name="split_select_pdf_first">Pilih PDF terlebih dahulu</string>
+    <string name="one_page_tips">PDF ini hanya memiliki satu halaman dan tidak dapat dipisahkan.</string>
+    <string name="pdf_split_failed">Tidak dapat memisahkan PDF</string>
+    <string name="splitting_pdf">Memisahkan PDF...</string>
+    <string name="split_page_number">Halaman %1$d</string>
+    <string name="split_selected_count">%1$d/%2$d halaman dipilih</string>
+    <string name="split_no_page_selected">Pilih minimal satu halaman untuk dipisahkan</string>
+    <string name="pdf_split_success_title">PDF Dipisahkan</string>
+    <string name="pdf_split_success_message">PDF hasil pemisahan Anda siap.</string>
     <string name="merge_selection_count">%1$d/%2$d dipilih. Pilih minimal 2 PDF.</string>
     <string name="no_pdf_files">Tidak ada file PDF ditemukan</string>
     <string name="merge_requires_two">Pilih minimal 2 PDF untuk digabungkan</string>

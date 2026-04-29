@@ -48,6 +48,16 @@
     <string name="merge_pdf">PDF मर्ज करें</string>
     <string name="split_pdf">PDF विभाजित करें</string>
     <string name="split_coming_soon">PDF विभाजित करना अभी उपलब्ध नहीं है</string>
+    <string name="split_select_pdf_tips">विभाजित करने के लिए एक PDF चुनें.</string>
+    <string name="split_select_pdf_first">कृपया पहले एक PDF चुनें</string>
+    <string name="one_page_tips">इस PDF में केवल एक पेज है, इसे विभाजित नहीं किया जा सकता.</string>
+    <string name="pdf_split_failed">PDF विभाजित नहीं की जा सकी</string>
+    <string name="splitting_pdf">PDF विभाजित की जा रही है...</string>
+    <string name="split_page_number">पेज %1$d</string>
+    <string name="split_selected_count">%1$d/%2$d पेज चुने गए</string>
+    <string name="split_no_page_selected">विभाजित करने के लिए कम से कम एक पेज चुनें</string>
+    <string name="pdf_split_success_title">PDF विभाजित हो गई</string>
+    <string name="pdf_split_success_message">आपकी विभाजित PDF तैयार है.</string>
     <string name="merge_selection_count">%1$d/%2$d चुने गए. कम से कम 2 PDF चुनें.</string>
     <string name="no_pdf_files">कोई PDF फाइल नहीं मिली</string>
     <string name="merge_requires_two">मर्ज करने के लिए कम से कम 2 PDF चुनें</string>

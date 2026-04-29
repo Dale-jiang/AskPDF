@@ -10,23 +10,31 @@ import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.ctf.askpdf.R
 import com.ctf.askpdf.app.AppLifecycleUtils
 import com.ctf.askpdf.databinding.DialogDocumentFileActionsBinding
 import com.ctf.askpdf.databinding.FragmentDocumentListBinding
+import com.ctf.askpdf.document.PdfPasswordUtils
 import com.ctf.askpdf.document.model.DocumentFile
 import com.ctf.askpdf.document.model.DocumentKind
 import com.ctf.askpdf.document.model.DocumentTab
 import com.ctf.askpdf.document.print.DocumentPrintAdapter
+import com.ctf.askpdf.document.split.SplitPdfFileStore
 import com.ctf.askpdf.feature.merge.MergePdfActivity
 import com.ctf.askpdf.feature.read.DocReadActivity
 import com.ctf.askpdf.feature.read.PdfReadActivity
+import com.ctf.askpdf.feature.split.SplitPreviewActivity
 import com.ctf.askpdf.presentation.adapter.DocumentFileAdapter
 import com.ctf.askpdf.presentation.base.BaseActivity
 import com.ctf.askpdf.presentation.base.BaseFragment
 import com.ctf.askpdf.presentation.dialog.DeleteConfirmDialog
+import com.ctf.askpdf.presentation.dialog.PdfPasswordDialog
 import com.ctf.askpdf.presentation.dialog.RenameFileDialog
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 
 class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentDocumentListBinding::inflate) {
@@ -192,7 +200,7 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
         }
         sheetBinding.btnSplit.setOnClickListener {
             dialog.dismiss()
-            openSplitPdfPage()
+            openSplitPdfPage(file)
         }
         sheetBinding.btnDelete.setOnClickListener {
             dialog.dismiss()
@@ -211,10 +219,56 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
     }
 
     /**
-     * 提示拆分 PDF 功能暂未开放，保证入口点击有明确反馈。
+     * 检查当前 PDF 是否可拆分，可拆分时直接进入页码预览页。
      */
-    private fun openSplitPdfPage() {
-        Toast.makeText(requireContext(), R.string.split_coming_soon, Toast.LENGTH_SHORT).show()
+    private fun openSplitPdfPage(file: DocumentFile) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val plainPageCount = SplitPdfFileStore.pageCount(requireContext(), file)
+            if (plainPageCount != null) {
+                openSplitPreviewIfAvailable(file, "", plainPageCount)
+                return@launch
+            }
+            val needsPassword = withContext(Dispatchers.IO) {
+                PdfPasswordUtils.needsPassword(file.path)
+            }
+            if (needsPassword) {
+                PdfPasswordDialog.newInstance(file.path, file.displayName) { pass ->
+                    if (pass.isNullOrBlank()) return@newInstance
+                    checkSplitPageCountThenOpen(file, pass)
+                }.show(parentFragmentManager, "split_pdf_password")
+            } else {
+                checkSplitPageCountThenOpen(file, "")
+            }
+        }
+    }
+
+    /**
+     * 读取 PDF 页数，单页时提示不可拆分。
+     */
+    private fun checkSplitPageCountThenOpen(file: DocumentFile, password: String) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val pageCount = SplitPdfFileStore.pageCount(requireContext(), file, password)
+            if (pageCount == null) {
+                Toast.makeText(requireContext(), R.string.pdf_split_failed, Toast.LENGTH_SHORT).show()
+                return@launch
+            }
+            openSplitPreviewIfAvailable(file, password, pageCount)
+        }
+    }
+
+    /**
+     * 页数满足拆分条件时进入预览页，否则提示单页不可拆分。
+     */
+    private fun openSplitPreviewIfAvailable(file: DocumentFile, password: String, pageCount: Int) {
+        if (pageCount < 2) {
+            Toast.makeText(requireContext(), R.string.one_page_tips, Toast.LENGTH_SHORT).show()
+            return
+        }
+        startActivity(Intent(requireContext(), SplitPreviewActivity::class.java).apply {
+            putExtra(SplitPreviewActivity.EXTRA_DOCUMENT_FILE, file)
+            putExtra(SplitPreviewActivity.EXTRA_PASSWORD, password)
+            putExtra(SplitPreviewActivity.EXTRA_PAGE_COUNT, pageCount)
+        })
     }
 
     /**

@@ -48,6 +48,16 @@
     <string name="merge_pdf">Mesclar PDF</string>
     <string name="split_pdf">Dividir PDF</string>
     <string name="split_coming_soon">Dividir PDF ainda não está disponível</string>
+    <string name="split_select_pdf_tips">Selecione um PDF para dividir.</string>
+    <string name="split_select_pdf_first">Selecione um PDF primeiro</string>
+    <string name="one_page_tips">Este PDF tem apenas uma página e não pode ser dividido.</string>
+    <string name="pdf_split_failed">Não foi possível dividir o PDF</string>
+    <string name="splitting_pdf">Dividindo PDF...</string>
+    <string name="split_page_number">Página %1$d</string>
+    <string name="split_selected_count">%1$d/%2$d páginas selecionadas</string>
+    <string name="split_no_page_selected">Selecione pelo menos uma página para dividir</string>
+    <string name="pdf_split_success_title">PDF dividido</string>
+    <string name="pdf_split_success_message">Seu PDF dividido está pronto.</string>
     <string name="merge_selection_count">%1$d/%2$d selecionados. Escolha pelo menos 2 PDFs.</string>
     <string name="no_pdf_files">Nenhum arquivo PDF encontrado</string>
     <string name="merge_requires_two">Selecione pelo menos 2 PDFs para mesclar</string>

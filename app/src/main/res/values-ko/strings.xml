@@ -48,6 +48,16 @@
     <string name="merge_pdf">PDF 병합</string>
     <string name="split_pdf">PDF 분할</string>
     <string name="split_coming_soon">PDF 분할은 아직 사용할 수 없습니다</string>
+    <string name="split_select_pdf_tips">분할할 PDF를 하나 선택하세요.</string>
+    <string name="split_select_pdf_first">먼저 PDF를 선택하세요</string>
+    <string name="one_page_tips">이 PDF는 한 페이지뿐이라 분할할 수 없습니다.</string>
+    <string name="pdf_split_failed">PDF를 분할할 수 없습니다</string>
+    <string name="splitting_pdf">PDF 분할 중...</string>
+    <string name="split_page_number">%1$d페이지</string>
+    <string name="split_selected_count">%1$d/%2$d페이지 선택됨</string>
+    <string name="split_no_page_selected">분할할 페이지를 하나 이상 선택하세요</string>
+    <string name="pdf_split_success_title">PDF 분할 완료</string>
+    <string name="pdf_split_success_message">분할된 PDF가 준비되었습니다.</string>
     <string name="merge_selection_count">%1$d/%2$d개 선택됨. PDF를 2개 이상 선택하세요.</string>
     <string name="no_pdf_files">PDF 파일을 찾을 수 없습니다</string>
     <string name="merge_requires_two">병합하려면 PDF를 2개 이상 선택하세요</string>
