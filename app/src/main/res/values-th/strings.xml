@@ -25,6 +25,8 @@
     <string name="file_name_exists">มีไฟล์ชื่อนี้อยู่แล้ว</string>
     <string name="rename_file_failed">ไม่สามารถเปลี่ยนชื่อไฟล์นี้ได้</string>
     <string name="delete_file_failed">ไม่สามารถลบไฟล์นี้ได้</string>
+    <string name="delete_confirm_title">ลบไฟล์หรือไม่</string>
+    <string name="delete_confirm_message">ไฟล์นี้จะถูกลบออกจากอุปกรณ์ของคุณอย่างถาวร</string>
     <string name="share_file_failed">ไม่สามารถแชร์ไฟล์นี้ได้</string>
     <string name="print_file_failed">ไม่สามารถพิมพ์ไฟล์นี้ได้</string>
     <string name="pdf_password_title">รหัสผ่าน PDF</string>

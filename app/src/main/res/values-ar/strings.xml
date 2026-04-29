@@ -25,6 +25,8 @@
     <string name="file_name_exists">يوجد ملف بهذا الاسم بالفعل</string>
     <string name="rename_file_failed">تعذرت إعادة تسمية هذا الملف</string>
     <string name="delete_file_failed">تعذر حذف هذا الملف</string>
+    <string name="delete_confirm_title">حذف الملف؟</string>
+    <string name="delete_confirm_message">سيتم حذف هذا الملف نهائيًا من جهازك.</string>
     <string name="share_file_failed">تعذرت مشاركة هذا الملف</string>
     <string name="print_file_failed">تعذرت طباعة هذا الملف</string>
     <string name="pdf_password_title">كلمة مرور PDF</string>

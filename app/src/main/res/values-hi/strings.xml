@@ -25,6 +25,8 @@
     <string name="file_name_exists">इस नाम की फाइल पहले से मौजूद है</string>
     <string name="rename_file_failed">इस फाइल का नाम नहीं बदला जा सका</string>
     <string name="delete_file_failed">इस फाइल को हटाया नहीं जा सका</string>
+    <string name="delete_confirm_title">फाइल हटाएं?</string>
+    <string name="delete_confirm_message">यह फाइल आपके डिवाइस से स्थायी रूप से हट जाएगी.</string>
     <string name="share_file_failed">इस फाइल को शेयर नहीं किया जा सका</string>
     <string name="print_file_failed">इस फाइल को प्रिंट नहीं किया जा सका</string>
     <string name="pdf_password_title">PDF पासवर्ड</string>

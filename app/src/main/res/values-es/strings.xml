@@ -25,6 +25,8 @@
     <string name="file_name_exists">Ya existe un archivo con este nombre</string>
     <string name="rename_file_failed">No se puede renombrar este archivo</string>
     <string name="delete_file_failed">No se puede eliminar este archivo</string>
+    <string name="delete_confirm_title">¿Eliminar archivo?</string>
+    <string name="delete_confirm_message">Esto eliminará permanentemente el archivo de tu dispositivo.</string>
     <string name="share_file_failed">No se puede compartir este archivo</string>
     <string name="print_file_failed">No se puede imprimir este archivo</string>
     <string name="pdf_password_title">Contraseña de PDF</string>

@@ -25,6 +25,8 @@
     <string name="file_name_exists">同じ名前のファイルが既に存在します</string>
     <string name="rename_file_failed">このファイルの名前を変更できません</string>
     <string name="delete_file_failed">このファイルを削除できません</string>
+    <string name="delete_confirm_title">ファイルを削除しますか？</string>
+    <string name="delete_confirm_message">このファイルは端末から完全に削除されます。</string>
     <string name="share_file_failed">このファイルを共有できません</string>
     <string name="print_file_failed">このファイルを印刷できません</string>
     <string name="pdf_password_title">PDFパスワード</string>

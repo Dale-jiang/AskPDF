@@ -24,6 +24,7 @@ import com.ctf.askpdf.feature.read.PdfReadActivity
 import com.ctf.askpdf.presentation.adapter.DocumentFileAdapter
 import com.ctf.askpdf.presentation.base.BaseActivity
 import com.ctf.askpdf.presentation.base.BaseFragment
+import com.ctf.askpdf.presentation.dialog.DeleteConfirmDialog
 import com.ctf.askpdf.presentation.dialog.RenameFileDialog
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.io.File
@@ -285,6 +286,23 @@ class DocumentListFragment : BaseFragment<FragmentDocumentListBinding>(FragmentD
      * 删除当前文件，并在失败时提示用户。
      */
     private fun deleteDocument(file: DocumentFile) {
+        if (documentTab == DocumentTab.RECENT) {
+            viewModel.removeRecentRecord(file) { success, errorRes ->
+                if (success.not() && errorRes != null) {
+                    Toast.makeText(requireContext(), errorRes, Toast.LENGTH_SHORT).show()
+                }
+            }
+            return
+        }
+        DeleteConfirmDialog.newInstance(file.displayName) {
+            deletePhysicalDocument(file)
+        }.show(parentFragmentManager, "delete_confirm")
+    }
+
+    /**
+     * 执行物理文件删除，并在失败时提示用户。
+     */
+    private fun deletePhysicalDocument(file: DocumentFile) {
         viewModel.deleteDocument(requireContext(), file) { success, errorRes ->
             if (success.not() && errorRes != null) {
                 Toast.makeText(requireContext(), errorRes, Toast.LENGTH_SHORT).show()

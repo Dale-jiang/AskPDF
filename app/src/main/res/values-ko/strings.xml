@@ -25,6 +25,8 @@
     <string name="file_name_exists">같은 이름의 파일이 이미 있습니다</string>
     <string name="rename_file_failed">이 파일의 이름을 변경할 수 없습니다</string>
     <string name="delete_file_failed">이 파일을 삭제할 수 없습니다</string>
+    <string name="delete_confirm_title">파일을 삭제할까요?</string>
+    <string name="delete_confirm_message">파일이 기기에서 영구적으로 삭제됩니다.</string>
     <string name="share_file_failed">이 파일을 공유할 수 없습니다</string>
     <string name="print_file_failed">이 파일을 인쇄할 수 없습니다</string>
     <string name="pdf_password_title">PDF 비밀번호</string>

@@ -21,6 +21,12 @@ interface DocumentFileDao {
     @Query("DELETE FROM document_file WHERE path = :path")
     suspend fun deleteByPath(path: String)
 
+    /**
+     * 清空最近浏览时间，用于仅移除 Recent 列表记录。
+     */
+    @Query("UPDATE document_file SET recentViewTime = 0 WHERE path = :path")
+    suspend fun clearRecentByPath(path: String)
+
     @Query("SELECT * FROM document_file WHERE recentViewTime > 0 ORDER BY recentViewTime DESC")
     fun observeRecentFiles(): Flow<List<DocumentFile>>
 

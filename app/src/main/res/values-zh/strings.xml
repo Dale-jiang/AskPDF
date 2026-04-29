@@ -29,6 +29,8 @@
     <string name="file_name_exists">已存在同名文件</string>
     <string name="rename_file_failed">无法重命名此文件</string>
     <string name="delete_file_failed">无法删除此文件</string>
+    <string name="delete_confirm_title">删除文件？</string>
+    <string name="delete_confirm_message">此操作会从设备中永久删除该文件。</string>
     <string name="share_file_failed">无法分享此文件</string>
     <string name="print_file_failed">无法打印此文件</string>
     <string name="pdf_password_title">PDF 密码</string>

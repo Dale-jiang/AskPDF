@@ -25,6 +25,8 @@
     <string name="file_name_exists">File dengan nama ini sudah ada</string>
     <string name="rename_file_failed">Tidak dapat mengganti nama file ini</string>
     <string name="delete_file_failed">Tidak dapat menghapus file ini</string>
+    <string name="delete_confirm_title">Hapus file?</string>
+    <string name="delete_confirm_message">File ini akan dihapus permanen dari perangkat Anda.</string>
     <string name="share_file_failed">Tidak dapat membagikan file ini</string>
     <string name="print_file_failed">Tidak dapat mencetak file ini</string>
     <string name="pdf_password_title">Kata Sandi PDF</string>

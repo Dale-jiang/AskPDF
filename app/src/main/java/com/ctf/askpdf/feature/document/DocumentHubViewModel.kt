@@ -158,6 +158,24 @@ class DocumentHubViewModel : ViewModel() {
     }
 
     /**
+     * 仅移除最近浏览记录，不删除本地文件或首页扫描列表。
+     */
+    fun removeRecentRecord(file: DocumentFile, onResult: (Boolean, Int?) -> Unit) {
+        viewModelScope.launch(Dispatchers.IO + SupervisorJob()) {
+            val dao = askPdfDatabase.documentFileDao()
+            val saved = dao.findByPath(file.path)
+            if (saved?.collected == true) {
+                dao.clearRecentByPath(file.path)
+            } else {
+                dao.deleteByPath(file.path)
+            }
+            withContext(Dispatchers.Main) {
+                onResult(true, null)
+            }
+        }
+    }
+
+    /**
      * 将新创建的 PDF 加入首页列表，并通知系统媒体库刷新。
      */
     fun addCreatedPdf(context: Context, pdfFile: File) {
