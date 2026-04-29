@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.viewbinding.ViewBinding
 import com.ctf.askpdf.core.locale.AppLanguageConfig
 import com.ctf.askpdf.data.local.selectedLanguageTag
@@ -30,10 +32,26 @@ abstract class BaseActivity<VB : ViewBinding>(private val inflateBinding: (Layou
         binding = inflateBinding(layoutInflater)
         setContentView(binding.root)
         setDensity()
+        applyNavigationBarVisibility()
         initView(savedInstanceState)
         initData()
         observeData()
     }
+
+    override fun onResume() {
+        super.onResume()
+        applyNavigationBarVisibility()
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) applyNavigationBarVisibility()
+    }
+
+    /**
+     * 是否隐藏虚拟导航栏，主页重写为 false。
+     */
+    protected open fun shouldHideNavigationBar(): Boolean = true
 
     /**
      * 初始化页面控件、点击事件和基础 UI 状态。
@@ -55,6 +73,7 @@ abstract class BaseActivity<VB : ViewBinding>(private val inflateBinding: (Layou
     fun AppCompatActivity.myEnableEdgeToEdge(topView: ViewGroup? = null, bottomView: ViewGroup? = null,topPadding: Boolean = true, bottomPadding: Boolean = true) {
         try {
             enableEdgeToEdge()
+            applyNavigationBarVisibility()
             val listenerView = window.decorView
             val paddingTopTarget = topView ?: listenerView
             val paddingBottomTarget = bottomView ?: listenerView
@@ -68,6 +87,21 @@ abstract class BaseActivity<VB : ViewBinding>(private val inflateBinding: (Layou
             }
         } catch (throwable: Throwable) {
             throwable.printStackTrace()
+        }
+    }
+
+    /**
+     * 仅控制虚拟导航栏显隐，保留状态栏。
+     */
+    private fun applyNavigationBarVisibility() {
+        runCatching {
+            val controller = WindowCompat.getInsetsController(window, window.decorView)
+            controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            if (shouldHideNavigationBar()) {
+                controller.hide(WindowInsetsCompat.Type.navigationBars())
+            } else {
+                controller.show(WindowInsetsCompat.Type.navigationBars())
+            }
         }
     }
 

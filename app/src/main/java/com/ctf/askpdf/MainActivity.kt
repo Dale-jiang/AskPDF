@@ -83,6 +83,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     override fun onAttachedToWindow() = myEnableEdgeToEdge(binding.container)
 
     /**
+     * 主页保留虚拟导航栏，方便顶层页面常规返回和系统操作。
+     */
+    override fun shouldHideNavigationBar(): Boolean = false
+
+    /**
      * 初始化首页基础 UI、顶层 tab 和文件权限状态。
      */
     override fun initView(savedInstanceState: Bundle?) {
