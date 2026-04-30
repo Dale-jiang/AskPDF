@@ -121,3 +121,6 @@ object SharedPreferencesUtil {
 var isFirstLaunch by BooleanPreference(true)
 
 var selectedLanguageTag by StringPreference("")
+
+// 标记旧版存储权限是否已请求过，用于识别“不再允许”后的系统设置跳转。
+var hasRequestedLegacyStoragePermission by BooleanPreference(false)

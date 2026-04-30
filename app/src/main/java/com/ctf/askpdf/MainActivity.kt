@@ -6,6 +6,7 @@ import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -20,6 +21,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.ctf.askpdf.app.AppLifecycleUtils
+import com.ctf.askpdf.data.local.hasRequestedLegacyStoragePermission
 import com.ctf.askpdf.databinding.ActivityMainBinding
 import com.ctf.askpdf.document.create.CreatedPdfFileStore
 import com.ctf.askpdf.document.model.DocumentFile
@@ -65,6 +67,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
     }
     private val settingsLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        AppLifecycleUtils.markNavigatingToSetting(false)
         if (hasDocumentStoragePermission()) {
             onStoragePermissionGranted()
         } else {
@@ -168,8 +171,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         viewModel.permissionMissingLiveData.postValue(true)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             settingsLauncher.launch(Intent(this, StoragePermissionAskActivity::class.java))
-        } else if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            requestLegacyStorage()
+        } else if (shouldOpenLegacyStorageSettings()) {
+            openAppPermissionSettings()
         } else {
             requestLegacyStorage()
         }
@@ -190,7 +193,28 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
      * 申请 Android 10 及以下的外部存储读写权限。
      */
     private fun requestLegacyStorage() {
+        hasRequestedLegacyStoragePermission = true
         legacyStorageLauncher.launch(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+    }
+
+    /**
+     * 判断旧版存储权限是否已被永久拒绝，需要改去应用权限设置页。
+     */
+    private fun shouldOpenLegacyStorageSettings(): Boolean {
+        val canShowRationale = listOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE).any {
+            ActivityCompat.shouldShowRequestPermissionRationale(this, it)
+        }
+        return hasRequestedLegacyStoragePermission && canShowRationale.not()
+    }
+
+    /**
+     * 打开当前应用权限设置页，让用户手动恢复已永久拒绝的存储权限。
+     */
+    private fun openAppPermissionSettings() {
+        AppLifecycleUtils.markNavigatingToSetting(true)
+        settingsLauncher.launch(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+            data = Uri.fromParts("package", packageName, null)
+        })
     }
 
     /**
