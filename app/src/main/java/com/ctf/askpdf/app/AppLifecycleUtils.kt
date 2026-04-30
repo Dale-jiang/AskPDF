@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicInteger
 
 object AppLifecycleUtils {
 
-    private const val WARM_LAUNCH_TIME = 200L
+    private const val WARM_LAUNCH_TIME = 300L
 
     private val activityRefs = Collections.newSetFromMap(
         ConcurrentHashMap<WeakReference<Activity>, Boolean>()
