@@ -5,6 +5,7 @@ import android.media.MediaScannerConnection
 import android.os.Environment
 import com.ctf.askpdf.document.model.DocumentFile
 import com.tom_roush.pdfbox.android.PDFBoxResourceLoader
+import com.tom_roush.pdfbox.io.MemoryUsageSetting
 import com.tom_roush.pdfbox.multipdf.PDFMergerUtility
 import com.tom_roush.pdfbox.pdmodel.PDDocument
 import kotlinx.coroutines.Dispatchers
@@ -30,19 +31,11 @@ object MergedPdfFileStore {
             val targetDir = resolveTargetDirectory()
             if (targetDir.exists().not() && targetDir.mkdirs().not()) return@withContext null
             val outputFile = resolveAvailableFile(targetDir, rawName)
-            val mergedDocument = PDDocument()
-            try {
-                val merger = PDFMergerUtility()
-                files.forEach { file ->
-                    val password = passwords[file.path].orEmpty()
-                    PDDocument.load(File(file.path), password).use { sourceDocument ->
-                        sourceDocument.isAllSecurityToBeRemoved = true
-                        merger.appendDocument(mergedDocument, sourceDocument)
-                    }
-                }
-                mergedDocument.save(outputFile)
-            } finally {
-                mergedDocument.close()
+            val memoryUsage = createDiskBackedMemoryUsage(context)
+            if (passwords.isEmpty()) {
+                mergePlainFiles(files, outputFile, memoryUsage)
+            } else {
+                mergePasswordProtectedFiles(files, outputFile, passwords, memoryUsage)
             }
             MediaScannerConnection.scanFile(
                 context.applicationContext,
@@ -52,6 +45,52 @@ object MergedPdfFileStore {
             )
             outputFile
         }.getOrNull()
+    }
+
+    /**
+     * 使用 PDFBox 优化模式合并普通 PDF，源文件可提前关闭，减少大文件内存占用。
+     */
+    private fun mergePlainFiles(
+        files: List<DocumentFile>,
+        outputFile: File,
+        memoryUsage: MemoryUsageSetting
+    ) {
+        PDFMergerUtility().apply {
+            setDocumentMergeMode(PDFMergerUtility.DocumentMergeMode.OPTIMIZE_RESOURCES_MODE)
+            destinationFileName = outputFile.absolutePath
+            files.forEach { addSource(File(it.path)) }
+            mergeDocuments(memoryUsage)
+        }
+    }
+
+    /**
+     * 合并带密码的 PDF，加载和目标文档都使用临时文件缓存以承载大文件。
+     */
+    private fun mergePasswordProtectedFiles(
+        files: List<DocumentFile>,
+        outputFile: File,
+        passwords: Map<String, String>,
+        memoryUsage: MemoryUsageSetting
+    ) {
+        PDDocument(memoryUsage).use { mergedDocument ->
+            val merger = PDFMergerUtility()
+            files.forEach { file ->
+                val password = passwords[file.path].orEmpty()
+                PDDocument.load(File(file.path), password, memoryUsage).use { sourceDocument ->
+                    sourceDocument.isAllSecurityToBeRemoved = true
+                    merger.appendDocument(mergedDocument, sourceDocument)
+                }
+            }
+            mergedDocument.save(outputFile)
+        }
+    }
+
+    /**
+     * 创建 PDFBox 临时文件缓存目录，避免大 PDF 合并时全部占用 JVM 堆内存。
+     */
+    private fun createDiskBackedMemoryUsage(context: Context): MemoryUsageSetting {
+        val tempDir = File(context.cacheDir, "pdfbox_merge_cache").apply { mkdirs() }
+        return MemoryUsageSetting.setupTempFileOnly().setTempDir(tempDir)
     }
 
     /**
