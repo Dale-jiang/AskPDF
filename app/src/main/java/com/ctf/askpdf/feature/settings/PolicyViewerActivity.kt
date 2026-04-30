@@ -15,7 +15,7 @@ class PolicyViewerActivity : BaseActivity<ActivityPolicyViewerBinding>(ActivityP
 
     companion object {
         const val EXTRA_PAGE_URL = "com.ctf.askpdf.extra.PAGE_URL"
-        const val DEFAULT_PRIVACY_URL = "https://sites.google.com/view/askpdf-privacy-policy/home"
+        const val DEFAULT_PRIVACY_URL = "https://sites.google.com/view/askpdf-privacy/home"
     }
 
     private val pageUrl by lazy { intent?.getStringExtra(EXTRA_PAGE_URL).orEmpty().ifBlank { DEFAULT_PRIVACY_URL } }
